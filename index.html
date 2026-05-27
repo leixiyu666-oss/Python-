@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python从入门到进阶 - 零基础全教程</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 80px 0; }
+        .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .roadmap-card { transition: transform 0.3s, box-shadow 0.3s; border: none; border-radius: 12px; overflow: hidden; }
+        .roadmap-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .step-number { width: 40px; height: 40px; background: #0d6efd; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .feature-icon { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .faq-item { border-left: 4px solid #0d6efd; padding-left: 15px; margin-bottom: 15px; }
+        .section-title { position: relative; padding-bottom: 10px; margin-bottom: 30px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: #0d6efd; }
+        .code-block { position: relative; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        .path-node { position: relative; padding-left: 30px; padding-bottom: 25px; border-left: 2px dashed #0d6efd; }
+        .path-node::before { content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px; background: #0d6efd; border-radius: 50%; }
+        .path-node:last-child { border-left: 2px solid transparent; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container text-center">
+        <h1><i class="bi bi-filetype-py me-3"></i>Python 从入门到进阶</h1>
+        <p class="lead mb-4">零基础 · 全链路 · 系统化 · 免费教程</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="base.html" class="btn btn-primary btn-lg px-4"><i class="bi bi-book me-2"></i>开始学习</a>
+            <a href="project.html" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-code-slash me-2"></i>实战项目</a>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-body">
+                        <h5><i class="bi bi-list-ul me-2"></i>学习目录</h5>
+                        <hr>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><a href="#about" class="text-decoration-none">网站简介</a></li>
+                            <li class="mb-2"><a href="#roadmap" class="text-decoration-none">学习路线图</a></li>
+                            <li class="mb-2"><a href="#guide" class="text-decoration-none">学习指南</a></li>
+                            <li class="mb-2"><a href="#quickstart" class="text-decoration-none">快速入口</a></li>
+                            <li class="mb-2"><a href="#firstcode" class="text-decoration-none">第一个程序</a></li>
+                            <li class="mb-2"><a href="#faq" class="text-decoration-none">常见问题</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <section id="about" class="mb-5">
+                <h2 class="section-title">关于本教程</h2>
+                <p class="fs-5">这是一套面向<strong>零基础</strong>学习者的 Python 全链路教程，覆盖从环境搭建、基础语法、进阶特性、标准库生态到实战项目的完整学习路径。</p>
+                <div class="row mt-4 g-3">
+                    <div class="col-md-4">
+                        <div class="card border-0 bg-light h-100">
+                            <div class="card-body text-center">
+                                <div class="feature-icon bg-primary text-white mx-auto mb-3"><i class="bi bi-people"></i></div>
+                                <h5>零基础友好</h5>
+                                <p class="small text-muted">从安装 Python 开始讲起，无需任何编程基础</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 bg-light h-100">
+                            <div class="card-body text-center">
+                                <div class="feature-icon bg-success text-white mx-auto mb-3"><i class="bi bi-diagram-3"></i></div>
+                                <h5>体系完整</h5>
+                                <p class="small text-muted">语法 → 进阶 → 库 → 项目，一条龙学习</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 bg-light h-100">
+                            <div class="card-body text-center">
+                                <div class="feature-icon bg-warning text-white mx-auto mb-3"><i class="bi bi-laptop"></i></div>
+                                <h5>即学即用</h5>
+                                <p class="small text-muted">每个知识点附带可运行代码示例</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="roadmap" class="mb-5">
+                <h2 class="section-title">学习路线图</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="path-node">
+                            <h5>第一阶段：入门基础（1-2周）</h5>
+                            <p class="text-muted mb-0">环境搭建 → 基础语法 → 数据类型 → 流程控制 → 函数 → 文件操作</p>
+                        </div>
+                        <div class="path-node">
+                            <h5>第二阶段：进阶提升（2-3周）</h5>
+                            <p class="text-muted mb-0">函数进阶 → OOP → 模块包 → 异常 → 标准库 → 迭代器 → 装饰器</p>
+                        </div>
+                        <div class="path-node">
+                            <h5>第三阶段：生态实战（3-4周）</h5>
+                            <p class="text-muted mb-0">第三方库 → 爬虫 → 自动化 → 数据分析 → Web开发 → 综合项目</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guide" class="mb-5">
+                <h2 class="section-title">学习前提与建议</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5><i class="bi bi-check-circle text-success me-2"></i>前置要求</h5>
+                                <ul>
+                                    <li>会基本电脑操作（安装软件、文件管理）</li>
+                                    <li>有基本的英文认读能力（关键词都是英文）</li>
+                                    <li>耐心和坚持（编程需要大量练习）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5><i class="bi bi-clock text-warning me-2"></i>时间建议</h5>
+                                <ul>
+                                    <li>每天 1-2 小时，持续 2 个月可达就业水平</li>
+                                    <li>光看不练 = 没学，每章代码必须亲手敲一遍</li>
+                                    <li>多做项目积累经验（实战篇准备了 10+ 个项目）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quickstart" class="mb-5">
+                <h2 class="section-title">快速入口</h2>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <a href="base.html" class="text-decoration-none">
+                            <div class="card roadmap-card h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="display-4 text-primary mb-3"><i class="bi bi-book"></i></div>
+                                    <h4>入门教程</h4>
+                                    <p class="text-muted small">10 章内容，零基础掌握 Python 语法</p>
+                                    <span class="btn btn-outline-primary btn-sm">开始学习</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="advance.html" class="text-decoration-none">
+                            <div class="card roadmap-card h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="display-4 text-success mb-3"><i class="bi bi-arrow-up-circle"></i></div>
+                                    <h4>进阶教程</h4>
+                                    <p class="text-muted small">OOP、装饰器、并发等进阶内容</p>
+                                    <span class="btn btn-outline-success btn-sm">深入提升</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="project.html" class="text-decoration-none">
+                            <div class="card roadmap-card h-100">
+                                <div class="card-body text-center p-4">
+                                    <div class="display-4 text-warning mb-3"><i class="bi bi-code-square"></i></div>
+                                    <h4>实战项目</h4>
+                                    <p class="text-muted small">从猜数字到博客系统，练手巩固</p>
+                                    <span class="btn btn-outline-warning btn-sm">动手实践</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="firstcode" class="mb-5">
+                <h2 class="section-title">第一个 Python 程序</h2>
+                <p>安装 Python 后，在终端输入 <code>python</code> 进入交互模式，或新建一个 <code>hello.py</code> 文件写入以下代码：</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 我的第一个 Python 程序
+print("Hello, Python!")    # 打印输出
+
+# 变量与输入
+name = input("请输入你的名字：")
+print(f"你好，{name}！欢迎开始 Python 学习之旅！")
+
+# 简单计算
+a = 10
+b = 20
+print(f"{a} + {b} = {a + b}")</code></pre>
+                </div>
+                <p class="mt-2 text-muted">在终端执行：<code>python hello.py</code>，即可看到输出结果。</p>
+            </section>
+
+            <section id="faq" class="mb-5">
+                <h2 class="section-title">新手常见问题</h2>
+                <div class="faq-item">
+                    <h5>Q：我完全零基础，能学会吗？</h5>
+                    <p class="text-muted">A：完全可以。Python 是公认最适合入门的编程语言，本教程从安装开始一步步讲解。</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Q：需要什么配置的电脑？</h5>
+                    <p class="text-muted">A：任何能正常运行的电脑都可以（Windows / Mac / Linux 均可）。</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Q：学完能达到什么水平？</h5>
+                    <p class="text-muted">A：认真学完入门 + 进阶 + 2-3 个项目，可达到初级 Python 开发水平。</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Q：需要学英语吗？</h5>
+                    <p class="text-muted">A：认识 26 个英文字母即可，代码中的英文关键词常见且固定。</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Q：学 Python 能做什么工作？</h5>
+                    <p class="text-muted">A：数据分析、Web 后端开发、自动化测试、爬虫工程师、AI/机器学习等。</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>快速链接</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="base.html" class="text-muted text-decoration-none">入门教程</a></li>
+                    <li><a href="advance.html" class="text-muted text-decoration-none">进阶教程</a></li>
+                    <li><a href="project.html" class="text-muted text-decoration-none">实战项目</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

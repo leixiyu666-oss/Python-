@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python标准库与第三方库</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .sidebar .nav-link { padding: 4px 12px; font-size: 0.9rem; color: #555; border-radius: 4px; }
+        .sidebar .nav-link:hover { background: #e9ecef; color: #0d6efd; }
+        .chapter { scroll-margin-top: 80px; }
+        .chapter h3 { color: #1a1a2e; border-bottom: 2px solid #dc3545; padding-bottom: 8px; margin-bottom: 20px; }
+        .code-block { position: relative; margin: 10px 0; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        .lib-card { transition: transform 0.2s; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .lib-card:hover { transform: translateY(-3px); }
+        .lib-icon { width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link active" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>目录导航</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#std-lib">常用标准库</a>
+                    <a class="nav-link" href="#data">数据分析方向</a>
+                    <a class="nav-link" href="#crawler">网络爬虫方向</a>
+                    <a class="nav-link" href="#auto">自动化方向</a>
+                    <a class="nav-link" href="#web">Web开发方向</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">Python 标准库 & 第三方库</h1>
+            <p class="lead text-muted">掌握 Python 生态中的核心库，从标准库到热门第三方库，每个库配安装命令和上手示例。</p>
+
+            <section id="std-lib" class="chapter mb-5">
+                <h3>常用标准库速查</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-primary text-white me-3">os</div>
+                                <div>
+                                    <h5 class="card-title">os</h5>
+                                    <p class="card-text small text-muted">操作系统接口：文件和目录操作、路径处理、环境变量</p>
+                                    <a href="advance.html#chap5" class="small">查看教程 →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-success text-white me-3">sys</div>
+                                <div>
+                                    <h5 class="card-title">sys</h5>
+                                    <p class="card-text small text-muted">系统相关：命令行参数、Python 版本、程序退出</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-info text-white me-3">dt</div>
+                                <div>
+                                    <h5 class="card-title">datetime</h5>
+                                    <p class="card-text small text-muted">日期和时间处理、格式化、时间计算</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-warning text-white me-3">json</div>
+                                <div>
+                                    <h5 class="card-title">json</h5>
+                                    <p class="card-text small text-muted">JSON 编码解码，数据序列化与反序列化</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-danger text-white me-3">re</div>
+                                <div>
+                                    <h5 class="card-title">re</h5>
+                                    <p class="card-text small text-muted">正则表达式：文本匹配、搜索、替换</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card lib-card h-100">
+                            <div class="card-body d-flex">
+                                <div class="lib-icon bg-secondary text-white me-3">math</div>
+                                <div>
+                                    <h5 class="card-title">math</h5>
+                                    <p class="card-text small text-muted">数学函数：三角函数、对数、常数 π/e</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="data" class="chapter mb-5">
+                <h3>数据分析方向</h3>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-primary me-2">pip install numpy</span> NumPy - 科学计算基础</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import numpy as np
+
+# 创建数组
+arr = np.array([1, 2, 3, 4, 5])
+print(arr)           # [1 2 3 4 5]
+print(arr.shape)     # (5,)
+
+# 二维数组
+matrix = np.array([[1, 2], [3, 4]])
+print(matrix.shape)  # (2, 2)
+
+# 常用函数
+zeros = np.zeros((3, 3))  # 全0矩阵
+ones = np.ones((2, 4))    # 全1矩阵
+nums = np.arange(10)      # [0 1 2 ... 9]
+random = np.random.randn(5)  # 正态分布随机数
+
+# 数组运算
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+print(a + b)   # [5 7 9]
+print(a * b)   # [4 10 18]
+print(a.mean())  # 2.0
+print(a.sum())   # 6</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-success me-2">pip install pandas</span> Pandas - 数据分析利器</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import pandas as pd
+
+# Series（一维）
+s = pd.Series([10, 20, 30, 40], index=["a", "b", "c", "d"])
+print(s["a"])  # 10
+
+# DataFrame（二维表格）
+data = {
+    "姓名": ["小明", "小红", "小刚"],
+    "年龄": [18, 20, 19],
+    "成绩": [95, 88, 92]
+}
+df = pd.DataFrame(data)
+print(df)
+
+# 基本操作
+print(df.head())        # 前5行
+print(df.describe())    # 统计摘要
+print(df["年龄"].mean()) # 年龄平均值
+
+# 筛选
+print(df[df["成绩"] > 90])  # 成绩 > 90 的行
+
+# 读取 CSV
+# df = pd.read_csv("data.csv")
+# df.to_csv("output.csv", index=False)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-warning text-dark me-2">pip install matplotlib</span> Matplotlib - 数据可视化</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import matplotlib.pyplot as plt
+
+# 折线图
+x = [1, 2, 3, 4, 5]
+y = [1, 4, 9, 16, 25]
+plt.plot(x, y, marker="o")
+plt.title("折线图示例")
+plt.xlabel("X轴")
+plt.ylabel("Y轴")
+plt.grid(True)
+plt.show()
+
+# 柱状图
+categories = ["Python", "Java", "C++", "JavaScript"]
+values = [95, 80, 75, 90]
+plt.bar(categories, values)
+plt.title("编程语言热度")
+plt.show()
+
+# 饼图
+sizes = [30, 25, 25, 20]
+labels = ["基础", "进阶", "项目", "库"]
+plt.pie(sizes, labels=labels, autopct="%1.1f%%")
+plt.show()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="crawler" class="chapter mb-5">
+                <h3>网络爬虫方向</h3>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-primary me-2">pip install requests</span> Requests - HTTP 请求库</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import requests
+
+# GET 请求
+resp = requests.get("https://api.github.com")
+print(resp.status_code)   # 200
+print(resp.json())        # JSON 格式响应
+
+# POST 请求
+data = {"username": "admin", "password": "123456"}
+resp = requests.post("https://httpbin.org/post", data=data)
+print(resp.text)
+
+# 请求头
+headers = {"User-Agent": "Mozilla/5.0"}
+resp = requests.get("https://example.com", headers=headers)
+
+# 超时设置
+resp = requests.get("https://example.com", timeout=5)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-success me-2">pip install beautifulsoup4</span> BeautifulSoup - 网页解析</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">from bs4 import BeautifulSoup
+import requests
+
+html = """
+<html><body>
+    <h1>标题</h1>
+    <div class="content">
+        <p>段落1</p>
+        <p>段落2</p>
+        <a href="https://example.com">链接</a>
+    </div>
+</body></html>
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+
+# 查找元素
+print(soup.h1.text)            # 标题
+print(soup.find("p").text)     # 段落1
+print(soup.find_all("p"))      # 所有 p 标签
+print(soup.select(".content")) # CSS 选择器
+print(soup.a["href"])          # 链接地址
+
+# 实战：爬取网页标题
+# resp = requests.get("https://example.com")
+# soup = BeautifulSoup(resp.text, "html.parser")
+# print(soup.title.text)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="auto" class="chapter mb-5">
+                <h3>自动化方向</h3>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-primary me-2">pip install openpyxl</span> Openpyxl - Excel 操作</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">from openpyxl import Workbook, load_workbook
+
+# 创建 Excel 文件
+wb = Workbook()
+ws = wb.active
+ws.title = "成绩表"
+
+# 写入数据
+ws["A1"] = "姓名"
+ws["B1"] = "成绩"
+ws.append(["小明", 95])
+ws.append(["小红", 88])
+ws.append(["小刚", 92])
+
+# 保存
+wb.save("成绩表.xlsx")
+
+# 读取 Excel
+wb2 = load_workbook("成绩表.xlsx")
+ws2 = wb2.active
+for row in ws2.iter_rows(values_only=True):
+    print(row)  # ('姓名', '成绩'), ('小明', 95), ...</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-warning text-dark me-2">pip install pyautogui</span> PyAutoGUI - 桌面自动化</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import pyautogui
+import time
+
+# 获取屏幕尺寸
+print(pyautogui.size())
+
+# 移动鼠标
+pyautogui.moveTo(100, 100, duration=0.5)
+
+# 点击
+pyautogui.click(200, 200)
+
+# 键盘输入
+pyautogui.write("Hello Python", interval=0.1)
+
+# 截图
+# screenshot = pyautogui.screenshot()
+# screenshot.save("screen.png")
+
+# 定位图片（需要截图）
+# location = pyautogui.locateOnScreen("button.png")</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="web" class="chapter mb-5">
+                <h3>Web 开发方向</h3>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><span class="badge bg-danger me-2">pip install flask</span> Flask - 轻量 Web 框架</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "&lt;h1&gt;Hello Flask!&lt;/h1&gt;"
+
+@app.route("/user/&lt;name&gt;")
+def user(name):
+    return f"&lt;h1&gt;你好，{name}！&lt;/h1&gt;"
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        return f"登录成功：{username}"
+    return """
+        &lt;form method="post"&gt;
+            &lt;input type="text" name="username"&gt;
+            &lt;button type="submit"&gt;登录&lt;/button&gt;
+        &lt;/form&gt;
+    """
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>继续学习</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="project.html" class="text-muted text-decoration-none">实战项目 →</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

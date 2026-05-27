@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python进阶教程 - 高阶语法与编程思想</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .sidebar .nav-link { padding: 4px 12px; font-size: 0.9rem; color: #555; border-radius: 4px; }
+        .sidebar .nav-link:hover { background: #e9ecef; color: #0d6efd; }
+        .chapter { scroll-margin-top: 80px; }
+        .chapter h3 { color: #1a1a2e; border-bottom: 2px solid #198754; padding-bottom: 8px; margin-bottom: 20px; }
+        .tip-box { background: #e7f5ff; border-left: 4px solid #0d6efd; padding: 12px 15px; margin: 15px 0; border-radius: 4px; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 15px; margin: 15px 0; border-radius: 4px; }
+        .code-block { position: relative; margin: 10px 0; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        .output-box { background: #1e1e1e; color: #d4d4d4; padding: 10px 15px; border-radius: 4px; font-family: monospace; margin: 5px 0 15px 0; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link active" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>目录导航</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#chap1">第1章 函数进阶</a>
+                    <a class="nav-link" href="#chap2">第2章 面向对象 OOP</a>
+                    <a class="nav-link" href="#chap3">第3章 模块与包</a>
+                    <a class="nav-link" href="#chap4">第4章 异常处理</a>
+                    <a class="nav-link" href="#chap5">第5章 常用标准库</a>
+                    <a class="nav-link" href="#chap6">第6章 迭代器与生成器</a>
+                    <a class="nav-link" href="#chap7">第7章 装饰器</a>
+                    <a class="nav-link" href="#chap8">第8章 并发基础</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">Python 进阶教程</h1>
+            <p class="lead text-muted">掌握 Python 进阶特性，面向对象编程思想、高阶函数、装饰器、并发等核心内容。</p>
+
+            <section id="chap1" class="chapter mb-5">
+                <h3>第1章 函数进阶</h3>
+
+                <h5>1.1 不定长参数 *args 和 **kwargs</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># *args：接收任意数量的位置参数，打包成元组
+def sum_all(*args):
+    print(args)      # (1, 2, 3, 4, 5)
+    return sum(args)
+
+print(sum_all(1, 2, 3, 4, 5))  # 15
+
+# **kwargs：接收任意数量的关键字参数，打包成字典
+def show_info(**kwargs):
+    print(kwargs)    # {'name': '小明', 'age': 18, 'city': '北京'}
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+show_info(name="小明", age=18, city="北京")
+
+# 混合使用
+def func(a, b, *args, **kwargs):
+    print(f"a={a}, b={b}")       # a=1, b=2
+    print(f"args={args}")        # (3, 4, 5)
+    print(f"kwargs={kwargs}")    # {'x': 10, 'y': 20}</code></pre>
+                </div>
+
+                <h5>1.2 函数嵌套与作用域</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 函数内部定义函数
+def outer(x):
+    def inner(y):
+        return x + y
+    return inner
+
+add5 = outer(5)
+print(add5(10))   # 15（闭包：记住了 outer 的 x）
+
+# nonlocal 关键字（修改外层函数的变量）
+def counter():
+    count = 0
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+    return increment
+
+c = counter()
+print(c())  # 1
+print(c())  # 2
+print(c())  # 3</code></pre>
+                </div>
+
+                <h5>1.3 匿名函数 lambda</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># lambda 参数: 表达式
+square = lambda x: x ** 2
+print(square(5))  # 25
+
+# 常用于排序
+students = [("小明", 18, 95), ("小红", 20, 88), ("小刚", 19, 92)]
+students.sort(key=lambda s: s[2], reverse=True)  # 按成绩排序
+print(students)</code></pre>
+                </div>
+
+                <h5>1.4 高阶函数 map、filter、reduce</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># map：对每个元素执行函数
+numbers = [1, 2, 3, 4, 5]
+squares = list(map(lambda x: x**2, numbers))
+print(squares)  # [1, 4, 9, 16, 25]
+
+# filter：过滤元素
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # [2, 4]
+
+# reduce：累积计算（需要导入）
+from functools import reduce
+total = reduce(lambda a, b: a + b, numbers)
+print(total)  # 15
+
+# reduce 执行过程：((1+2)+3)+4)+5 = 15</code></pre>
+                </div>
+
+                <h5>1.5 递归函数</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 递归：函数调用自身
+# 必须有关闭条件，否则会无限递归
+
+# 阶乘 n! = n * (n-1)!
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))  # 120
+
+# 斐波那契数列
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+
+for i in range(10):
+    print(fib(i), end=" ")  # 0 1 1 2 3 5 8 13 21 34</code></pre>
+                </div>
+            </section>
+
+            <section id="chap2" class="chapter mb-5">
+                <h3>第2章 面向对象编程 OOP</h3>
+
+                <h5>2.1 类与对象</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 类相当于模板，对象是根据模板创建的实例
+class Student:
+    """学生类"""
+    # 构造方法（初始化）
+    def __init__(self, name, age, score):
+        self.name = name    # 实例属性
+        self.age = age
+        self.score = score
+
+    # 实例方法
+    def introduce(self):
+        return f"我叫{self.name}，今年{self.age}岁，成绩{self.score}分"
+
+    def is_pass(self):
+        return self.score >= 60
+
+# 创建对象（实例化）
+s1 = Student("小明", 18, 95)
+s2 = Student("小红", 20, 58)
+
+print(s1.introduce())  # 我叫小明，今年18岁，成绩95分
+print(s1.is_pass())    # True
+print(s2.is_pass())    # False</code></pre>
+                </div>
+
+                <h5>2.2 类属性与实例属性</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">class Dog:
+    species = "犬科"  # 类属性（所有实例共享）
+
+    def __init__(self, name, age):
+        self.name = name   # 实例属性（每个实例独立）
+        self.age = age
+
+d1 = Dog("旺财", 3)
+d2 = Dog("来福", 5)
+
+print(d1.species)  # 犬科（访问类属性）
+print(d2.species)  # 犬科
+print(d1.name)     # 旺财（访问实例属性）
+print(d2.name)     # 来福
+
+# 修改类属性会影响所有实例
+Dog.species = "哺乳类"
+print(d1.species)  # 哺乳类</code></pre>
+                </div>
+
+                <h5>2.3 封装、继承、多态</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># === 封装 ===
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.__balance = balance  # 私有属性（双下划线开头）
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            return f"存款成功，余额：{self.__balance}"
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            return f"取款成功，余额：{self.__balance}"
+        return "余额不足"
+
+    def get_balance(self):
+        return self.__balance
+
+# === 继承 ===
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        pass  # 父类方法，子类重写
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name}：喵喵喵"
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name}：汪汪汪"
+
+# === 多态 ===
+animals = [Cat("小花"), Dog("旺财")]
+for animal in animals:
+    print(animal.speak())</code></pre>
+                </div>
+
+                <h5>2.4 魔法方法</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    def __str__(self):
+        return f"《{self.title}》- {self.author}"
+
+    def __len__(self):
+        return len(self.title)
+
+    def __eq__(self, other):
+        return self.title == other.title
+
+b1 = Book("Python编程", "张三")
+b2 = Book("Python编程", "李四")
+
+print(b1)         # 《Python编程》- 张三（__str__）
+print(len(b1))    # 10（__len__）
+print(b1 == b2)   # True（__eq__ 比较书名）</code></pre>
+                </div>
+            </section>
+
+            <section id="chap3" class="chapter mb-5">
+                <h3>第3章 模块与包</h3>
+
+                <h5>3.1 模块导入</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 导入整个模块
+import math
+print(math.sqrt(16))  # 4.0
+
+# 导入特定函数或变量
+from math import pi, sqrt
+print(pi)    # 3.141592653589793
+print(sqrt(9))  # 3.0
+
+# 导入所有（不推荐，可能命名冲突）
+from math import *
+
+# 起别名
+import numpy as np
+from math import sqrt as square_root</code></pre>
+                </div>
+
+                <h5>3.2 自定义模块</h5>
+                <p>新建一个 <code>myutils.py</code> 文件：</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># myutils.py
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+PI = 3.14159</code></pre>
+                </div>
+                <p>在另一个文件中导入使用：</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import myutils
+print(myutils.add(3, 5))        # 8
+print(myutils.multiply(3, 5))  # 15</code></pre>
+                </div>
+
+                <h5>3.3 __name__ 变量</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 每个 Python 文件都有 __name__ 变量
+# 当前文件直接运行时 __name__ = "__main__"
+# 被导入时 __name__ = 模块名
+
+def main():
+    print("这是程序入口")
+
+if __name__ == "__main__":
+    main()  # 只有直接运行时才执行</code></pre>
+                </div>
+            </section>
+
+            <section id="chap4" class="chapter mb-5">
+                <h3>第4章 异常处理</h3>
+
+                <h5>4.1 常见异常类型</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>异常类型</th><th>触发场景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>SyntaxError</td><td>语法错误</td></tr>
+                            <tr><td>NameError</td><td>变量未定义</td></tr>
+                            <tr><td>TypeError</td><td>类型不匹配</td></tr>
+                            <tr><td>IndexError</td><td>索引越界</td></tr>
+                            <tr><td>KeyError</td><td>字典键不存在</td></tr>
+                            <tr><td>ValueError</td><td>值错误</td></tr>
+                            <tr><td>ZeroDivisionError</td><td>除以0</td></tr>
+                            <tr><td>FileNotFoundError</td><td>文件不存在</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h5>4.2 try-except 捕获异常</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">try:
+    num = int(input("请输入一个数字："))
+    result = 100 / num
+    print(f"100/{num} = {result}")
+
+except ValueError:
+    print("错误：请输入有效的数字！")
+
+except ZeroDivisionError:
+    print("错误：除数不能为0！")
+
+except Exception as e:
+    print(f"发生未知错误：{e}")
+
+else:
+    print("没有发生异常，执行 else 块")
+
+finally:
+    print("无论是否异常都会执行 finally 块")</code></pre>
+                </div>
+
+                <h5>4.3 raise 主动抛出异常</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">def withdraw(balance, amount):
+    if amount <= 0:
+        raise ValueError("取款金额必须大于0")
+    if amount > balance:
+        raise ValueError("余额不足")
+    return balance - amount
+
+try:
+    new_balance = withdraw(100, -50)
+except ValueError as e:
+    print(f"取款失败：{e}")</code></pre>
+                </div>
+            </section>
+
+            <section id="chap5" class="chapter mb-5">
+                <h3>第5章 常用标准库</h3>
+
+                <h5>5.1 os 库 - 文件与路径操作</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import os
+
+# 获取当前工作目录
+print(os.getcwd())
+
+# 列出目录内容
+print(os.listdir("."))
+
+# 创建/删除目录
+os.makedirs("test/sub", exist_ok=True)  # 创建多级目录
+os.rmdir("test/sub")                     # 删除空目录
+
+# 路径拼接
+path = os.path.join("folder", "file.txt")
+print(path)  # folder/file.txt
+
+# 判断路径类型
+print(os.path.isfile("hello.py"))   # 是否是文件
+print(os.path.isdir("folder"))      # 是否是目录
+print(os.path.exists("hello.py"))   # 是否存在</code></pre>
+                </div>
+
+                <h5>5.2 sys 库 - 系统参数</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import sys
+
+# 命令行参数
+print(sys.argv)  # ['script.py', 'arg1', 'arg2']
+
+# Python 版本
+print(sys.version)  # 3.12.0 ...
+
+# 退出程序
+# sys.exit(0)  # 正常退出
+
+# 添加模块搜索路径
+sys.path.append("/my/path")</code></pre>
+                </div>
+
+                <h5>5.3 time/datetime - 时间处理</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import time
+from datetime import datetime, timedelta
+
+# time 模块
+print(time.time())       # 当前时间戳（秒）
+time.sleep(1)            # 暂停1秒
+
+# datetime 模块
+now = datetime.now()
+print(now)              # 2026-05-27 22:30:00
+
+# 格式化
+print(now.strftime("%Y-%m-%d %H:%M:%S"))  # 2026-05-27 22:30:00
+
+# 字符串转日期
+dt = datetime.strptime("2026-01-01", "%Y-%m-%d")
+print(dt)  # 2026-01-01 00:00:00
+
+# 时间计算
+tomorrow = now + timedelta(days=1)
+print(tomorrow)</code></pre>
+                </div>
+
+                <h5>5.4 random - 随机数</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import random
+
+# 随机整数 [1, 100]
+print(random.randint(1, 100))
+
+# 随机选择
+fruits = ["苹果", "香蕉", "橘子", "西瓜"]
+print(random.choice(fruits))    # 随机选一个
+print(random.choices(fruits, k=2))  # 随机选2个（可重复）
+print(random.sample(fruits, k=2))   # 随机选2个（不重复）
+
+# 打乱列表
+random.shuffle(fruits)
+print(fruits)
+
+# 随机浮点数 [0, 1)
+print(random.random())
+
+# 随机浮点数 [a, b]
+print(random.uniform(1, 10))</code></pre>
+                </div>
+
+                <h5>5.5 json - 数据序列化</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import json
+
+# 字典 → JSON 字符串
+data = {"name": "小明", "age": 18, "scores": [95, 88, 92]}
+json_str = json.dumps(data, ensure_ascii=False, indent=2)
+print(json_str)
+
+# JSON 字符串 → 字典
+json_data = '{"name": "小红", "age": 20}'
+parsed = json.loads(json_data)
+print(parsed["name"])  # 小红
+
+# 读写 JSON 文件
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+with open("data.json", "r", encoding="utf-8") as f:
+    loaded = json.load(f)
+    print(loaded)</code></pre>
+                </div>
+            </section>
+
+            <section id="chap6" class="chapter mb-5">
+                <h3>第6章 迭代器与生成器</h3>
+
+                <h5>6.1 可迭代对象与迭代器</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 可迭代对象：list、tuple、dict、set、str 等
+# 迭代器：可以记住遍历位置的对象
+
+# for 循环本质上是不断调用 next() 获取下一个元素
+nums = [1, 2, 3]
+it = iter(nums)  # 获取迭代器
+print(next(it))  # 1
+print(next(it))  # 2
+print(next(it))  # 3
+# print(next(it))  # StopIteration（没有更多元素）
+
+# 自定义可迭代对象
+class MyRange:
+    def __init__(self, n):
+        self.n = n
+        self.current = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current >= self.n:
+            raise StopIteration
+        value = self.current
+        self.current += 1
+        return value
+
+for i in MyRange(5):
+    print(i, end=" ")  # 0 1 2 3 4</code></pre>
+                </div>
+
+                <h5>6.2 生成器 yield</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 生成器：用 yield 替代 return，函数变成生成器
+# 每次调用 yield 暂停并返回值，下次从暂停处继续
+
+def count_down(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+for num in count_down(5):
+    print(num, end=" ")  # 5 4 3 2 1
+
+print()
+
+# 生成器表达式（类似列表推导式，但节约内存）
+squares = (x**2 for x in range(10))
+for s in squares:
+    print(s, end=" ")  # 0 1 4 9 16 25 36 49 64 81</code></pre>
+                </div>
+
+                <h5>6.3 生成器优势：节省内存</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import sys
+
+# 列表推导式：一次性生成所有元素，占用大量内存
+list_squares = [x**2 for x in range(1000000)]
+print(f"列表大小：{sys.getsizeof(list_squares)} bytes")
+
+# 生成器表达式：按需生成，几乎不占内存
+gen_squares = (x**2 for x in range(1000000))
+print(f"生成器大小：{sys.getsizeof(gen_squares)} bytes")
+
+# 适合处理大数据、大文件
+def read_large_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            yield line.strip()</code></pre>
+                </div>
+            </section>
+
+            <section id="chap7" class="chapter mb-5">
+                <h3>第7章 装饰器</h3>
+
+                <h5>7.1 装饰器原理</h5>
+                <p>装饰器本质是<strong>闭包</strong>，可以在不修改原函数代码的情况下增加功能。</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 最简单的装饰器
+def my_decorator(func):
+    def wrapper():
+        print("在函数调用前执行")
+        func()
+        print("在函数调用后执行")
+    return wrapper
+
+@my_decorator  # 等价于 say_hello = my_decorator(say_hello)
+def say_hello():
+    print("Hello!")
+
+say_hello()
+# 输出：
+# 在函数调用前执行
+# Hello!
+# 在函数调用后执行</code></pre>
+                </div>
+
+                <h5>7.2 带参数的装饰器</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 被装饰函数有参数
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        print(f"调用函数：{func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"函数返回：{result}")
+        return result
+    return wrapper
+
+@decorator
+def add(a, b):
+    return a + b
+
+print(add(3, 5))
+# 输出：
+# 调用函数：add
+# 函数返回：8
+# 8</code></pre>
+                </div>
+
+                <h5>7.3 装饰器实际应用</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 应用1：计算函数执行时间
+import time
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} 耗时：{end - start:.4f}秒")
+        return result
+    return wrapper
+
+@timer
+def slow_func():
+    time.sleep(1)
+    return "完成"
+
+slow_func()
+
+# 应用2：权限校验
+def require_auth(func):
+    def wrapper(*args, **kwargs):
+        user = kwargs.get("user")
+        if not user:
+            print("错误：未登录")
+            return
+        if not user.get("is_admin"):
+            print("错误：权限不足")
+            return
+        return func(*args, **kwargs)
+    return wrapper
+
+@require_auth
+def delete_data(user=None):
+    print("数据已删除")
+
+delete_data()                          # 错误：未登录
+delete_data(user={"name": "admin"})    # 错误：权限不足
+delete_data(user={"name": "admin", "is_admin": True})  # 数据已删除</code></pre>
+                </div>
+            </section>
+
+            <section id="chap8" class="chapter mb-5">
+                <h3>第8章 并发基础</h3>
+
+                <h5>8.1 进程与线程概念</h5>
+                <ul>
+                    <li><strong>进程</strong>：程序的一次执行，拥有独立的内存空间</li>
+                    <li><strong>线程</strong>：进程内的执行单元，共享进程的内存</li>
+                    <li>Python 的 GIL 锁导致多线程不能真正并行计算，但适合 I/O 密集型任务</li>
+                </ul>
+
+                <h5>8.2 threading 多线程</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import threading
+import time
+
+def task(name, seconds):
+    print(f"线程 {name} 开始")
+    time.sleep(seconds)
+    print(f"线程 {name} 结束（耗时{seconds}秒）")
+
+# 创建线程
+t1 = threading.Thread(target=task, args=("A", 2))
+t2 = threading.Thread(target=task, args=("B", 1))
+
+# 启动线程
+t1.start()
+t2.start()
+
+# 等待线程结束
+t1.join()
+t2.join()
+
+print("所有线程执行完毕")</code></pre>
+                </div>
+
+                <h5>8.3 线程安全与锁</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import threading
+
+counter = 0
+lock = threading.Lock()
+
+def increment():
+    global counter
+    for _ in range(100000):
+        with lock:  # 加锁保护共享资源
+            counter += 1
+
+threads = []
+for i in range(10):
+    t = threading.Thread(target=increment)
+    threads.append(t)
+    t.start()
+
+for t in threads:
+    t.join()
+
+print(f"计数结果：{counter}")  # 1000000（不加锁可能小于此值）</code></pre>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>继续学习</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="lib.html" class="text-muted text-decoration-none">标准库教程 →</a></li>
+                    <li><a href="project.html" class="text-muted text-decoration-none">实战项目 →</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

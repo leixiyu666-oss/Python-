@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python工具资源大全</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .resource-card { border: none; border-radius: 10px; transition: transform 0.2s; }
+        .resource-card:hover { transform: translateY(-3px); }
+        .resource-icon { width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .link-card { border-left: 4px solid #0d6efd; padding: 15px; margin: 10px 0; background: #f8f9fa; border-radius: 4px; }
+        .link-card:hover { background: #e9ecef; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link active" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>资源目录</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#software">软件下载</a>
+                    <a class="nav-link" href="#practice">练习平台</a>
+                    <a class="nav-link" href="#books">推荐书籍</a>
+                    <a class="nav-link" href="#snippets">常用代码段</a>
+                    <a class="nav-link" href="#debug">排错与调试</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">工具 & 资源</h1>
+            <p class="lead text-muted">Python 开发必备工具、学习资源、常用代码段汇总。</p>
+
+            <section id="software" class="mb-5">
+                <h3 class="section-title">软件下载</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card resource-card">
+                            <div class="card-body d-flex">
+                                <div class="resource-icon bg-primary text-white me-3"><i class="bi bi-filetype-py"></i></div>
+                                <div>
+                                    <h5>Python 官方</h5>
+                                    <a href="https://www.python.org/downloads/" target="_blank" class="text-decoration-none">python.org/downloads</a>
+                                    <p class="small text-muted mt-1">下载最新版 Python 安装包</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card resource-card">
+                            <div class="card-body d-flex">
+                                <div class="resource-icon bg-success text-white me-3"><i class="bi bi-code-square"></i></div>
+                                <div>
+                                    <h5>VS Code</h5>
+                                    <a href="https://code.visualstudio.com/" target="_blank" class="text-decoration-none">code.visualstudio.com</a>
+                                    <p class="small text-muted mt-1">轻量级代码编辑器（推荐）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card resource-card">
+                            <div class="card-body d-flex">
+                                <div class="resource-icon bg-warning text-white me-3"><i class="bi bi-lightning"></i></div>
+                                <div>
+                                    <h5>PyCharm</h5>
+                                    <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="text-decoration-none">jetbrains.com/pycharm</a>
+                                    <p class="small text-muted mt-1">专业 Python IDE（社区版免费）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card resource-card">
+                            <div class="card-body d-flex">
+                                <div class="resource-icon bg-danger text-white me-3"><i class="bi bi-terminal"></i></div>
+                                <div>
+                                    <h5>Anaconda</h5>
+                                    <a href="https://www.anaconda.com/download" target="_blank" class="text-decoration-none">anaconda.com</a>
+                                    <p class="small text-muted mt-1">数据科学全家桶（含 Python + 常用库）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice" class="mb-5">
+                <h3 class="section-title">在线练习平台</h3>
+                <div class="link-card">
+                    <h5><i class="bi bi-lightning-charge me-2 text-primary"></i>LeetCode</h5>
+                    <p class="mb-1">全球最大的编程刷题平台，Python 题库丰富</p>
+                    <a href="https://leetcode.cn/" target="_blank">https://leetcode.cn/</a>
+                </div>
+                <div class="link-card">
+                    <h5><i class="bi bi-lightning-charge me-2 text-primary"></i>牛客网</h5>
+                    <p class="mb-1">国内编程练习平台，有 Python 专项题库</p>
+                    <a href="https://www.nowcoder.com/" target="_blank">https://www.nowcoder.com/</a>
+                </div>
+                <div class="link-card">
+                    <h5><i class="bi bi-lightning-charge me-2 text-primary"></i>Python Tutor</h5>
+                    <p class="mb-1">可视化代码执行过程，适合理解代码逻辑</p>
+                    <a href="https://pythontutor.com/" target="_blank">https://pythontutor.com/</a>
+                </div>
+                <div class="link-card">
+                    <h5><i class="bi bi-lightning-charge me-2 text-primary"></i>Codewars</h5>
+                    <p class="mb-1">通过挑战提升编程技能，支持 Python</p>
+                    <a href="https://www.codewars.com/" target="_blank">https://www.codewars.com/</a>
+                </div>
+            </section>
+
+            <section id="books" class="mb-5">
+                <h3 class="section-title">推荐书籍 & 文档</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>《Python编程：从入门到实践》</h5>
+                                <p class="small text-muted">最适合零基础的入门书，项目驱动</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>《流畅的Python》</h5>
+                                <p class="small text-muted">进阶必读，深入理解 Python 特性</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>《Python Cookbook》</h5>
+                                <p class="small text-muted">实战问题解决方案合集</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>官方文档</h5>
+                                <p class="small text-muted">最权威的参考资料：<a href="https://docs.python.org/zh-cn/3/" target="_blank">docs.python.org</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="snippets" class="mb-5">
+                <h3 class="section-title">常用代码片段</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 1. 获取当前日期时间
+from datetime import datetime
+now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+# 2. 遍历列表带索引
+for i, item in enumerate(["a","b","c"]):
+    print(i, item)
+
+# 3. 列表去重保持顺序
+items = [1, 2, 2, 3, 1, 4]
+unique = list(dict.fromkeys(items))  # [1, 2, 3, 4]
+
+# 4. 字典排序
+d = {"a": 3, "b": 1, "c": 2}
+sorted_d = dict(sorted(d.items(), key=lambda x: x[1]))
+# {'b': 1, 'c': 2, 'a': 3}
+
+# 5. 合并两个字典
+a = {"x": 1, "y": 2}
+b = {"y": 3, "z": 4}
+merged = {**a, **b}  # {'x': 1, 'y': 3, 'z': 4}
+
+# 6. 检查文件是否存在
+import os
+if os.path.exists("file.txt"):
+    print("文件存在")
+
+# 7. 生成随机密码
+import random
+import string
+password = "".join(random.choices(string.ascii_letters + string.digits, k=8))
+
+# 8. 统计元素出现次数
+from collections import Counter
+data = [1, 1, 2, 2, 2, 3]
+count = Counter(data)  # Counter({2: 3, 1: 2, 3: 1})</code></pre>
+                </div>
+
+                <h5 class="mt-4">VS Code 快捷键（提高效率）</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>快捷键</th><th>作用</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Ctrl + Shift + P</td><td>命令面板</td></tr>
+                            <tr><td>Ctrl + /</td><td>注释/取消注释</td></tr>
+                            <tr><td>Tab / Shift+Tab</td><td>缩进/取消缩进</td></tr>
+                            <tr><td>Alt + 上下箭头</td><td>移动代码行</td></tr>
+                            <tr><td>Ctrl + D</td><td>选中相同词</td></tr>
+                            <tr><td>Ctrl + `</td><td>打开终端</td></tr>
+                            <tr><td>F5</td><td>运行/调试</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="debug" class="mb-5">
+                <h3 class="section-title">排错技巧与调试方法</h3>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>方法1：print 调试法（最基础）</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python"># 在关键位置打印变量值
+def divide(a, b):
+    print(f"DEBUG: a={a}, b={b}")  # 查看输入
+    result = a / b
+    print(f"DEBUG: result={result}")
+    return result</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>方法2：使用断言 assert</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">def set_age(age):
+    assert 0 < age < 150, f"年龄不合法：{age}"
+    print(f"年龄设置为{age}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>方法3：使用 logging 模块</h5>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format="%(asctime)s - %(levelname)s - %(message)s")
+
+def func(x):
+    logging.debug(f"函数被调用，x={x}")
+    result = x * 2
+    logging.info(f"计算结果：{result}")
+    return result</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>常见错误速查</h5>
+                        <ul>
+                            <li><code>IndentationError</code>：缩进错误，检查空格/Tab</li>
+                            <li><code>NameError</code>：变量未定义，检查拼写</li>
+                            <li><code>TypeError</code>：类型不匹配，检查运算符两侧类型</li>
+                            <li><code>SyntaxError</code>：语法错误，检查括号、冒号</li>
+                            <li><code>ModuleNotFoundError</code>：模块未安装，执行 <code>pip install</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="about.html" class="text-muted text-decoration-none small">关于本站</a>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

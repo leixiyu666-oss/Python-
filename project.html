@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python实战项目 - 从入门到综合</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .sidebar .nav-link { padding: 4px 12px; font-size: 0.9rem; color: #555; border-radius: 4px; }
+        .sidebar .nav-link:hover { background: #e9ecef; color: #0d6efd; }
+        .chapter { scroll-margin-top: 80px; }
+        .chapter h3 { color: #1a1a2e; border-bottom: 2px solid #ffc107; padding-bottom: 8px; margin-bottom: 20px; }
+        .code-block { position: relative; margin: 10px 0; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        .project-card { border: none; border-radius: 12px; overflow: hidden; transition: transform 0.3s; }
+        .project-card:hover { transform: translateY(-3px); }
+        .diff-badge { position: absolute; top: 12px; right: 12px; }
+        .output-box { background: #1e1e1e; color: #d4d4d4; padding: 10px 15px; border-radius: 4px; font-family: monospace; margin: 5px 0 15px 0; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link active" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>项目列表</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#beginner">初级项目</a>
+                    <a class="nav-link" href="#p1">   1. 简易计算器</a>
+                    <a class="nav-link" href="#p2">   2. 猜数字游戏</a>
+                    <a class="nav-link" href="#p3">   3. 记事本工具</a>
+                    <a class="nav-link" href="#p4">   4. 批量重命名</a>
+                    <a class="nav-link" href="#intermediate">中级项目</a>
+                    <a class="nav-link" href="#p5">   5. 学生管理系统</a>
+                    <a class="nav-link" href="#p6">   6. 天气查询</a>
+                    <a class="nav-link" href="#p7">   7. Excel 统计工具</a>
+                    <a class="nav-link" href="#advanced">高级项目</a>
+                    <a class="nav-link" href="#p8">   8. Flask 博客</a>
+                    <a class="nav-link" href="#p9">   9. 图片爬虫</a>
+                    <a class="nav-link" href="#p10">  10. 签到脚本</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">Python 实战项目</h1>
+            <p class="lead text-muted">从初级到高级，每个项目独立完整，可直接运行。建议先尝试自己写再看答案。</p>
+
+            <div class="alert alert-warning">
+                <strong>学习建议：</strong>先独立思考实现思路，遇到困难再看代码。每行代码都要理解，不要直接复制。
+            </div>
+
+            <section id="beginner" class="mb-5">
+                <h3 class="border-start border-4 border-success ps-3">初级项目（入门阶段）</h3>
+            </section>
+
+            <section id="p1" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-success">初级</span>
+                        <h4>项目1：简易计算器</h4>
+                        <p><strong>涉及知识点：</strong>函数、条件判断、循环、输入输出</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">def calculator():
+    print("=== 简易计算器 ===")
+    print("支持的运算：+, -, *, /")
+
+    while True:
+        try:
+            a = float(input("请输入第一个数字："))
+            op = input("请输入运算符（输入 q 退出）：")
+            if op == "q":
+                print("退出计算器")
+                break
+            b = float(input("请输入第二个数字："))
+
+            if op == "+":
+                result = a + b
+            elif op == "-":
+                result = a - b
+            elif op == "*":
+                result = a * b
+            elif op == "/":
+                if b == 0:
+                    print("错误：除数不能为0")
+                    continue
+                result = a / b
+            else:
+                print("不支持的运算符")
+                continue
+
+            print(f"{a} {op} {b} = {result}")
+            print("-" * 20)
+
+        except ValueError:
+            print("错误：请输入有效的数字")
+
+if __name__ == "__main__":
+    calculator()</code></pre>
+                        </div>
+                        <div class="output-box">=== 简易计算器 ===<br>支持的运算：+, -, *, /<br>请输入第一个数字：10<br>请输入运算符（输入 q 退出）：+<br>请输入第二个数字：5<br>10.0 + 5.0 = 15.0<br>--------------------</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p2" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-success">初级</span>
+                        <h4>项目2：猜数字游戏</h4>
+                        <p><strong>涉及知识点：</strong>random 库、while 循环、条件判断、异常处理</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import random
+
+def guess_number():
+    target = random.randint(1, 100)
+    attempts = 0
+    print("=== 猜数字游戏 ===")
+    print("我已经想好了一个1-100之间的数字")
+
+    while True:
+        try:
+            guess = int(input("请猜一个数字："))
+            attempts += 1
+
+            if guess < 1 or guess > 100:
+                print("请输入1-100之间的数字")
+                continue
+
+            if guess < target:
+                print("小了，再大一点")
+            elif guess > target:
+                print("大了，再小一点")
+            else:
+                print(f"恭喜你猜中了！答案是{target}")
+                print(f"你一共猜了{attempts}次")
+                break
+
+        except ValueError:
+            print("请输入有效的数字")
+
+if __name__ == "__main__":
+    guess_number()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p3" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-success">初级</span>
+                        <h4>项目3：记事本读写工具</h4>
+                        <p><strong>涉及知识点：</strong>文件操作、with 语句、try-except</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import os
+
+NOTE_FILE = "notes.txt"
+
+def write_note():
+    content = input("请输入笔记内容：")
+    with open(NOTE_FILE, "a", encoding="utf-8") as f:
+        f.write(content + "\n")
+    print("笔记已保存")
+
+def read_notes():
+    if not os.path.exists(NOTE_FILE):
+        print("暂无笔记")
+        return
+    with open(NOTE_FILE, "r", encoding="utf-8") as f:
+        notes = f.read()
+        if notes:
+            print("=== 我的笔记 ===")
+            print(notes)
+        else:
+            print("暂无笔记")
+
+def delete_notes():
+    if os.path.exists(NOTE_FILE):
+        os.remove(NOTE_FILE)
+        print("所有笔记已删除")
+    else:
+        print("暂无笔记可删除")
+
+def main():
+    while True:
+        print("\n=== 记事本工具 ===")
+        print("1. 写笔记")
+        print("2. 查看笔记")
+        print("3. 删除所有笔记")
+        print("4. 退出")
+        choice = input("请选择：")
+
+        if choice == "1":
+            write_note()
+        elif choice == "2":
+            read_notes()
+        elif choice == "3":
+            delete_notes()
+        elif choice == "4":
+            print("再见！")
+            break
+        else:
+            print("无效选择")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p4" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-success">初级</span>
+                        <h4>项目4：批量重命名文件</h4>
+                        <p><strong>涉及知识点：</strong>os 库、列表操作、字符串处理</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import os
+
+def batch_rename():
+    folder = input("请输入文件夹路径（留空为当前目录）：").strip()
+    if not folder:
+        folder = "."
+
+    if not os.path.exists(folder):
+        print("文件夹不存在")
+        return
+
+    prefix = input("请输入文件名前缀：")
+    ext = input("请输入要修改的文件扩展名（如 .txt）：")
+    start_num = int(input("请输入起始编号（默认1）：") or "1")
+
+    files = [f for f in os.listdir(folder)
+             if f.endswith(ext) and os.path.isfile(os.path.join(folder, f))]
+    files.sort()
+
+    if not files:
+        print(f"没有找到 {ext} 文件")
+        return
+
+    print(f"找到 {len(files)} 个文件")
+    for i, old_name in enumerate(files, start=start_num):
+        new_name = f"{prefix}_{i:03d}{ext}"
+        old_path = os.path.join(folder, old_name)
+        new_path = os.path.join(folder, new_name)
+        os.rename(old_path, new_path)
+        print(f"重命名：{old_name} → {new_name}")
+
+    print("全部重命名完成")
+
+if __name__ == "__main__":
+    batch_rename()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="intermediate" class="mb-5 mt-5">
+                <h3 class="border-start border-4 border-warning ps-3">中级项目（进阶阶段）</h3>
+            </section>
+
+            <section id="p5" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-warning text-dark">中级</span>
+                        <h4>项目5：学生信息管理系统</h4>
+                        <p><strong>涉及知识点：</strong>OOP、文件存储、函数模块化</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import json
+import os
+
+DATA_FILE = "students.json"
+
+class Student:
+    def __init__(self, sid, name, age, grade):
+        self.sid = sid
+        self.name = name
+        self.age = age
+        self.grade = grade
+
+    def to_dict(self):
+        return {"id": self.sid, "name": self.name,
+                "age": self.age, "grade": self.grade}
+
+class StudentManager:
+    def __init__(self):
+        self.students = []
+        self.load_data()
+
+    def load_data(self):
+        if os.path.exists(DATA_FILE):
+            with open(DATA_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                self.students = [Student(**s) for s in data]
+
+    def save_data(self):
+        with open(DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump([s.to_dict() for s in self.students],
+                      f, ensure_ascii=False, indent=2)
+
+    def add_student(self):
+        sid = input("学号：")
+        name = input("姓名：")
+        age = int(input("年龄："))
+        grade = float(input("成绩："))
+        self.students.append(Student(sid, name, age, grade))
+        self.save_data()
+        print("添加成功")
+
+    def show_all(self):
+        if not self.students:
+            print("暂无学生信息")
+            return
+        print(f"{'学号':<8}{'姓名':<8}{'年龄':<6}{'成绩':<6}")
+        print("-"*30)
+        for s in self.students:
+            print(f"{s.sid:<8}{s.name:<8}{s.age:<6}{s.grade:<6}")
+
+    def search(self):
+        keyword = input("请输入学号或姓名：")
+        results = [s for s in self.students
+                   if keyword in s.sid or keyword in s.name]
+        if results:
+            for s in results:
+                print(f"{s.sid} {s.name} {s.age}岁 {s.grade}分")
+        else:
+            print("未找到")
+
+    def delete_student(self):
+        sid = input("请输入要删除的学号：")
+        for s in self.students:
+            if s.sid == sid:
+                self.students.remove(s)
+                self.save_data()
+                print("已删除")
+                return
+        print("未找到该学号")
+
+    def menu(self):
+        while True:
+            print("\n=== 学生信息管理系统 ===")
+            print("1. 添加学生")
+            print("2. 查看所有学生")
+            print("3. 搜索学生")
+            print("4. 删除学生")
+            print("5. 退出")
+            choice = input("请选择：")
+            if choice == "1": self.add_student()
+            elif choice == "2": self.show_all()
+            elif choice == "3": self.search()
+            elif choice == "4": self.delete_student()
+            elif choice == "5":
+                print("再见！")
+                break
+            else:
+                print("无效选择")
+
+if __name__ == "__main__":
+    manager = StudentManager()
+    manager.menu()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p6" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-warning text-dark">中级</span>
+                        <h4>项目6：天气查询工具</h4>
+                        <p><strong>涉及知识点：</strong>requests 爬虫、JSON 解析、API 调用</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import requests
+
+def get_weather(city):
+    # 使用 wttr.in 免费天气 API（无需 key）
+    url = f"https://wttr.in/{city}?format=%C+%t+%w+%h"
+
+    try:
+        resp = requests.get(url, timeout=10)
+        if resp.status_code == 200:
+            return resp.text.strip()
+        else:
+            return "查询失败"
+    except Exception as e:
+        return f"错误：{e}"
+
+def main():
+    print("=== 天气查询工具 ===")
+    print("支持中文城市名，如：北京、上海、深圳")
+
+    while True:
+        city = input("\n请输入城市名（输入 q 退出）：").strip()
+        if city.lower() == "q":
+            print("再见！")
+            break
+        if not city:
+            continue
+
+        weather = get_weather(city)
+        print(f"{city}天气：{weather}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                        </div>
+                        <div class="output-box">=== 天气查询工具 ===<br>支持中文城市名，如：北京、上海、深圳<br><br>请输入城市名（输入 q 退出）：北京<br>北京天气：Cloudy +15°C ↑11km/h 45%</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p7" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-warning text-dark">中级</span>
+                        <h4>项目7：Excel 数据统计工具</h4>
+                        <p><strong>涉及知识点：</strong>openpyxl、数据统计、表格处理</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">from openpyxl import Workbook, load_workbook
+import os
+
+def create_sample_data():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "销售数据"
+    ws.append(["月份", "产品", "销量", "金额"])
+    ws.append(["1月", "A", 120, 12000])
+    ws.append(["1月", "B", 85, 8500])
+    ws.append(["2月", "A", 150, 15000])
+    ws.append(["2月", "B", 95, 9500])
+    ws.append(["3月", "A", 110, 11000])
+    ws.append(["3月", "B", 130, 13000])
+    wb.save("销售数据.xlsx")
+    return "销售数据.xlsx"
+
+def analyze_excel(filename):
+    if not os.path.exists(filename):
+        return "文件不存在"
+
+    wb = load_workbook(filename, data_only=True)
+    ws = wb.active
+
+    data = []
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if row[0] is not None:
+            data.append(row)
+
+    if not data:
+        return "无数据"
+
+    total_sales = sum(row[2] for row in data)
+    total_amount = sum(row[3] for row in data)
+    avg_amount = total_amount / len(data) if data else 0
+
+    products = {}
+    for row in data:
+        product = row[1]
+        if product not in products:
+            products[product] = {"销量": 0, "金额": 0}
+        products[product]["销量"] += row[2]
+        products[product]["金额"] += row[3]
+
+    result = f"总销量：{total_sales}\n"
+    result += f"总金额：{total_amount}\n"
+    result += f"平均金额：{avg_amount:.2f}\n"
+    result += "各产品销售统计：\n"
+    for p, s in products.items():
+        result += f"  {p}：销量{s['销量']}，金额{s['金额']}\n"
+
+    return result
+
+if __name__ == "__main__":
+    file = create_sample_data()
+    print(f"已创建示例文件：{file}")
+    print("\n统计分析结果：")
+    print(analyze_excel(file))</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced" class="mb-5 mt-5">
+                <h3 class="border-start border-4 border-danger ps-3">高级项目（综合运用）</h3>
+            </section>
+
+            <section id="p8" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-danger">高级</span>
+                        <h4>项目8：Flask 个人博客（后端）</h4>
+                        <p><strong>涉及知识点：</strong>Flask Web 框架、路由、模板渲染、请求处理</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">from flask import Flask, render_template, request, redirect
+
+app = Flask(__name__)
+
+# 模拟数据库
+posts = []
+post_id = 1
+
+@app.route("/")
+def home():
+    return """
+    &lt;h1&gt;个人博客&lt;/h1&gt;
+    &lt;a href="/posts"&gt;查看所有文章&lt;/a&gt; |
+    &lt;a href="/new"&gt;写文章&lt;/a&gt;
+    """
+
+@app.route("/posts")
+def list_posts():
+    html = "&lt;h1&gt;文章列表&lt;/h1&gt;&lt;ul&gt;"
+    for p in posts:
+        html += f'&lt;li&gt;&lt;a href="/post/{p["id"]}"&gt;{p["title"]}&lt;/a&gt;&lt;/li&gt;'
+    html += "&lt;/ul&gt;&lt;a href='/new'&gt;写新文章&lt;/a&gt;"
+    return html
+
+@app.route("/post/&lt;int:id&gt;")
+def show_post(id):
+    for p in posts:
+        if p["id"] == id:
+            return f"&lt;h1&gt;{p['title']}&lt;/h1&gt;&lt;p&gt;{p['content']}&lt;/p&gt;"
+    return "&lt;h1&gt;404 - 文章不存在&lt;/h1&gt;", 404
+
+@app.route("/new", methods=["GET", "POST"])
+def new_post():
+    global post_id
+    if request.method == "POST":
+        title = request.form["title"]
+        content = request.form["content"]
+        posts.append({"id": post_id, "title": title, "content": content})
+        post_id += 1
+        return redirect("/posts")
+    return """
+    &lt;h1&gt;写新文章&lt;/h1&gt;
+    &lt;form method="post"&gt;
+        &lt;p&gt;标题：&lt;input type="text" name="title" required&gt;&lt;/p&gt;
+        &lt;p&gt;内容：&lt;/p&gt;
+        &lt;textarea name="content" rows="10" cols="50" required&gt;&lt;/textarea&gt;
+        &lt;p&gt;&lt;button type="submit"&gt;发布&lt;/button&gt;&lt;/p&gt;
+    &lt;/form&gt;
+    &lt;a href="/posts"&gt;返回文章列表&lt;/a&gt;
+    """
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+                        </div>
+                        <div class="tip-box">
+                            <strong>运行方式：</strong>保存为 <code>blog.py</code>，执行 <code>python blog.py</code>，浏览器访问 <code>http://127.0.0.1:5000</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p9" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-danger">高级</span>
+                        <h4>项目9：简易图片爬虫</h4>
+                        <p><strong>涉及知识点：</strong>requests、BeautifulSoup、文件下载、异常处理</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">import requests
+from bs4 import BeautifulSoup
+import os
+from urllib.parse import urljoin
+
+def download_images(url, save_folder="images"):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+
+    try:
+        resp = requests.get(url, headers=headers, timeout=10)
+        resp.encoding = "utf-8"
+        soup = BeautifulSoup(resp.text, "html.parser")
+    except Exception as e:
+        print(f"请求失败：{e}")
+        return
+
+    os.makedirs(save_folder, exist_ok=True)
+
+    img_tags = soup.find_all("img")
+    downloaded = 0
+
+    for i, img in enumerate(img_tags):
+        src = img.get("src")
+        if not src:
+            continue
+        img_url = urljoin(url, src)
+
+        if not img_url.startswith("http"):
+            continue
+
+        try:
+            img_resp = requests.get(img_url, headers=headers, timeout=10)
+            if img_resp.status_code == 200:
+                ext = os.path.splitext(img_url)[1]
+                if ext.lower() not in [".jpg", ".jpeg", ".png", ".gif", ".webp"]:
+                    ext = ".jpg"
+                filename = os.path.join(save_folder, f"img_{i}{ext}")
+                with open(filename, "wb") as f:
+                    f.write(img_resp.content)
+                downloaded += 1
+                print(f"已下载：{filename}")
+        except Exception as e:
+            print(f"下载失败：{img_url} - {e}")
+
+    print(f"\n共下载 {downloaded} 张图片到 {save_folder} 文件夹")
+
+if __name__ == "__main__":
+    url = input("请输入网页URL：")
+    download_images(url)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="p10" class="chapter mb-5">
+                <div class="card project-card">
+                    <div class="card-body position-relative">
+                        <span class="diff-badge badge bg-danger">高级</span>
+                        <h4>项目10：自动化签到脚本</h4>
+                        <p><strong>涉及知识点：</strong>requests 会话、定时任务、文件存储状态</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">"""
+模拟签到脚本 - 自动记录签到状态
+实际使用时替换为对应网站的 API
+"""
+import json
+import os
+from datetime import datetime
+
+RECORD_FILE = "checkin_record.json"
+
+class AutoCheckin:
+    def __init__(self):
+        self.records = self.load_records()
+
+    def load_records(self):
+        if os.path.exists(RECORD_FILE):
+            with open(RECORD_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return {"total_days": 0, "last_checkin": None, "history": []}
+
+    def save_records(self):
+        with open(RECORD_FILE, "w", encoding="utf-8") as f:
+            json.dump(self.records, f, ensure_ascii=False, indent=2)
+
+    def checkin(self, username):
+        today = datetime.now().strftime("%Y-%m-%d")
+
+        # 检查是否已签到
+        if self.records.get("last_checkin") == today:
+            return f"{username}，今天已经签到过了"
+
+        # 模拟签到请求
+        print(f"正在为 {username} 执行签到...")
+        # TODO: 替换为真实的 API 请求
+        # resp = requests.post("https://example.com/checkin", data={"user": username})
+
+        self.records["total_days"] += 1
+        self.records["last_checkin"] = today
+        self.records["history"].append({
+            "date": today,
+            "time": datetime.now().strftime("%H:%M:%S"),
+            "username": username
+        })
+        self.save_records()
+
+        return f"{username} 签到成功！连续签到 {self.records['total_days']} 天"
+
+    def show_status(self):
+        print("\n=== 签到状态 ===")
+        print(f"总签到天数：{self.records['total_days']}")
+        print(f"上次签到：{self.records['last_checkin'] or '从未签到'}")
+        if self.records["history"]:
+            print("最近记录：")
+            for h in self.records["history"][-5:]:
+                print(f"  {h['date']} {h['time']} - {h['username']}")
+
+def main():
+    checker = AutoCheckin()
+
+    while True:
+        print("\n=== 自动化签到系统 ===")
+        print("1. 执行签到")
+        print("2. 查看签到状态")
+        print("3. 退出")
+        choice = input("请选择：")
+
+        if choice == "1":
+            username = input("请输入用户名：")
+            result = checker.checkin(username)
+            print(result)
+        elif choice == "2":
+            checker.show_status()
+        elif choice == "3":
+            print("再见！")
+            break
+        else:
+            print("无效选择")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>快速链接</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="base.html" class="text-muted text-decoration-none">入门教程</a></li>
+                    <li><a href="advance.html" class="text-muted text-decoration-none">进阶教程</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

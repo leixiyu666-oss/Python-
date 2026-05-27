@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python入门教程 - 零基础学Python</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .sidebar .nav-link { padding: 4px 12px; font-size: 0.9rem; color: #555; border-radius: 4px; }
+        .sidebar .nav-link:hover { background: #e9ecef; color: #0d6efd; }
+        .sidebar .nav-link.active { background: #0d6efd; color: #fff; }
+        .chapter { scroll-margin-top: 80px; }
+        .chapter h3 { color: #1a1a2e; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; margin-bottom: 20px; }
+        .tip-box { background: #e7f5ff; border-left: 4px solid #0d6efd; padding: 12px 15px; margin: 15px 0; border-radius: 4px; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 15px; margin: 15px 0; border-radius: 4px; }
+        .code-block { position: relative; margin: 10px 0; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        .output-box { background: #1e1e1e; color: #d4d4d4; padding: 10px 15px; border-radius: 4px; font-family: monospace; margin: 5px 0 15px 0; }
+        .table-wrap { overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link active" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>目录导航</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#chap1">第1章 初识Python</a>
+                    <a class="nav-link" href="#chap2">第2章 基础语法与规则</a>
+                    <a class="nav-link" href="#chap3">第3章 数据类型</a>
+                    <a class="nav-link" href="#chap4">第4章 运算符</a>
+                    <a class="nav-link" href="#chap5">第5章 流程控制</a>
+                    <a class="nav-link" href="#chap6">第6章 字符串详解</a>
+                    <a class="nav-link" href="#chap7">第7章 列表 & 元组</a>
+                    <a class="nav-link" href="#chap8">第8章 字典 & 集合</a>
+                    <a class="nav-link" href="#chap9">第9章 函数基础</a>
+                    <a class="nav-link" href="#chap10">第10章 文件操作</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">Python 零基础入门教程</h1>
+            <p class="lead text-muted">本教程共 10 章，循序渐进，适合完全零基础的读者。每章配有代码示例，建议边学边练。</p>
+
+            <section id="chap1" class="chapter mb-5">
+                <h3>第1章 初识 Python</h3>
+
+                <h5>1.1 Python 是什么</h5>
+                <p>Python 是一种解释型、面向对象的高级编程语言，由 Guido van Rossum 于 1991 年发布。它以简洁清晰的语法著称，被称为"可执行的伪代码"。</p>
+                <p><strong>主要应用领域：</strong></p>
+                <ul>
+                    <li><strong>数据分析</strong>：Pandas、NumPy、Matplotlib</li>
+                    <li><strong>网络爬虫</strong>：Requests、Scrapy、BeautifulSoup</li>
+                    <li><strong>Web 后端</strong>：Django、Flask、FastAPI</li>
+                    <li><strong>自动化运维</strong>：自动化脚本、办公自动化</li>
+                    <li><strong>人工智能</strong>：TensorFlow、PyTorch、Scikit-learn</li>
+                    <li><strong>游戏开发</strong>：Pygame</li>
+                </ul>
+
+                <h5>1.2 版本选择</h5>
+                <p>Python 有 2.x 和 3.x 两大版本，3.x 是当前主流。<strong>请选择 Python 3.8 及以上版本</strong>（目前最新稳定版为 3.12）。Python 2 已于 2020 年停止维护，切勿学习。</p>
+
+                <h5>1.3 环境安装（Windows）</h5>
+                <ol>
+                    <li>打开官网 <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+                    <li>下载最新版 Python 安装包</li>
+                    <li>安装时<strong>务必勾选</strong> "Add Python to PATH"</li>
+                    <li>打开终端（cmd），输入 <code>python --version</code> 验证</li>
+                </ol>
+                <div class="tip-box">
+                    <strong>提示：</strong>Mac 用户推荐用 Homebrew 安装：<code>brew install python3</code>；Linux 用户使用包管理器：<code>sudo apt install python3</code>
+                </div>
+
+                <h5>1.4 编辑器选择与配置</h5>
+                <ul>
+                    <li><strong>IDLE</strong>：Python 自带的编辑器，适合第一周体验</li>
+                    <li><strong>VS Code</strong>：轻量免费，推荐！安装 Python 插件即可</li>
+                    <li><strong>PyCharm</strong>：专业 IDE，功能强大，适合做大项目</li>
+                </ul>
+
+                <h5>1.5 第一个程序：Hello World</h5>
+                <p>新建文件 <code>hello.py</code>，写入：</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">print("Hello, World!")</code></pre>
+                </div>
+                <p>在终端执行：</p>
+                <div class="output-box">$ python hello.py<br>Hello, World!</div>
+                <p>两种运行方式：</p>
+                <ul>
+                    <li><strong>终端运行</strong>：<code>python 文件名.py</code></li>
+                    <li><strong>交互模式</strong>：终端输入 <code>python</code> 进入 &gt;&gt;&gt; 提示符，直接输入代码</li>
+                </ul>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 交互模式示例
+>>> print("Hello")
+Hello
+>>> 1 + 2
+3</code></pre>
+                </div>
+            </section>
+
+            <section id="chap2" class="chapter mb-5">
+                <h3>第2章 基础语法与规则</h3>
+
+                <h5>2.1 注释</h5>
+                <p>注释是给程序员看的说明文字，Python 解释器会忽略注释。</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 这是单行注释
+
+"""
+这是多行注释
+可以写多行说明文字
+一般用于函数和类的文档说明
+"""</code></pre>
+                </div>
+
+                <h5>2.2 缩进规则（Python 核心！）</h5>
+                <div class="warning-box">
+                    <strong>易错点：</strong>Python 使用缩进来表示代码块，而不是 { }。同一代码块内的语句必须有相同的缩进（通常为 4 个空格）。混用空格和 Tab 会导致错误！
+                </div>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 正确的缩进
+if True:
+    print("条件成立")    # 4个空格
+    print("同一代码块")
+
+# 错误的缩进（会报错 IndentationError）
+# if True:
+# print("没有缩进")   # ❌ 错误</code></pre>
+                </div>
+
+                <h5>2.3 变量</h5>
+                <p>变量是用来存储数据的容器。Python 是动态类型语言，不需要声明变量类型。</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">name = "小明"       # 字符串
+age = 18            # 整数
+height = 1.75       # 浮点数
+is_student = True   # 布尔值
+
+print(name, age, height, is_student)</code></pre>
+                </div>
+
+                <h5>2.4 变量命名规范</h5>
+                <ul>
+                    <li>只能包含字母、数字、下划线</li>
+                    <li>不能以数字开头</li>
+                    <li>区分大小写（name ≠ Name）</li>
+                    <li>不能使用 Python 关键字</li>
+                    <li>建议使用有意义的英文单词，用下划线分隔（snake_case）</li>
+                </ul>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 合法变量名
+user_name = "Alice"
+user_age = 25
+temp_value = 36.5
+
+# 不合法变量名（会报错）
+# 123abc = "test"   # 数字开头 ❌
+# user-name = "Bob"  # 包含连字符 ❌
+# class = "python"   # 关键字 ❌</code></pre>
+                </div>
+
+                <h5>2.5 关键字（保留字）</h5>
+                <p>Python 中有 35 个关键字，不能用作变量名：</p>
+                <p><code>False, None, True, and, as, assert, async, await, break, class, continue, def, del, elif, else, except, finally, for, from, global, if, import, in, is, lambda, nonlocal, not, or, pass, raise, return, try, while, with, yield</code></p>
+            </section>
+
+            <section id="chap3" class="chapter mb-5">
+                <h3>第3章 数据类型</h3>
+
+                <h5>3.1 六大基础类型</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>类型</th><th>名称</th><th>示例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>int</td><td>整数</td><td>10, -5, 0, 100</td></tr>
+                            <tr><td>float</td><td>浮点数</td><td>3.14, -0.5, 2.0</td></tr>
+                            <tr><td>str</td><td>字符串</td><td>"Hello", 'Python', "123"</td></tr>
+                            <tr><td>bool</td><td>布尔值</td><td>True, False</td></tr>
+                            <tr><td>list</td><td>列表</td><td>[1, 2, 3], ["a", "b"]</td></tr>
+                            <tr><td>tuple</td><td>元组</td><td>(1, 2), ("a", "b")</td></tr>
+                            <tr><td>dict</td><td>字典</td><td>{"name": "Tom", "age": 18}</td></tr>
+                            <tr><td>set</td><td>集合</td><td>{1, 2, 3}, {"a", "b"}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h5>3.2 类型转换</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 类型转换函数
+str(123)       # "123"
+int("456")     # 456
+float("3.14")  # 3.14
+bool(1)        # True
+bool(0)        # False
+bool("")       # False（空字符串为 False）
+bool("abc")    # True
+
+# 实战：用户输入都是字符串，需要转换
+age = input("请输入年龄：")     # 返回字符串 "18"
+age = int(age)                 # 转换为整数 18
+print(f"明年你 {age + 1} 岁了")</code></pre>
+                </div>
+
+                <h5>3.3 输入输出</h5>
+                <p><strong>input()</strong>：从键盘获取输入，返回字符串。<br><strong>print()</strong>：输出到控制台。</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># input() 用法
+name = input("请输入姓名：")
+
+# print() 多种用法
+print("你好")                              # 直接打印
+print("姓名:", name)                       # 逗号分隔多个值
+print("Hello", "World", sep="-")           # 指定分隔符
+print("第一行", end="")                     # 不换行
+print("同一行")
+
+# 格式化输出（推荐 f-string）
+age = 18
+print(f"我叫{name}，今年{age}岁")            # f-string 最简洁
+print("我叫{}，今年{}岁".format(name, age))   # format 方法
+print("我叫%s，今年%d岁" % (name, age))       # % 格式化（旧式）</code></pre>
+                </div>
+                <div class="output-box">请输入姓名：小明<br>你好<br>姓名: 小明<br>Hello-World<br>同一行<br>我叫小明，今年18岁<br>我叫小明，今年18岁<br>我叫小明，今年18岁</div>
+            </section>
+
+            <section id="chap4" class="chapter mb-5">
+                <h3>第4章 运算符</h3>
+
+                <h5>4.1 算术运算符</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>运算符</th><th>名称</th><th>示例</th><th>结果</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>+</td><td>加</td><td>10 + 3</td><td>13</td></tr>
+                            <tr><td>-</td><td>减</td><td>10 - 3</td><td>7</td></tr>
+                            <tr><td>*</td><td>乘</td><td>10 * 3</td><td>30</td></tr>
+                            <tr><td>/</td><td>除</td><td>10 / 3</td><td>3.333...</td></tr>
+                            <tr><td>//</td><td>整除</td><td>10 // 3</td><td>3</td></tr>
+                            <tr><td>%</td><td>取余</td><td>10 % 3</td><td>1</td></tr>
+                            <tr><td>**</td><td>幂运算</td><td>2 ** 3</td><td>8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h5>4.2 比较运算符</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">print(10 > 5)    # True
+print(10 < 5)    # False
+print(10 == 10)  # True（判断相等用 ==）
+print(10 != 5)   # True
+print(10 >= 10)  # True
+print(10 <= 5)   # False</code></pre>
+                </div>
+
+                <h5>4.3 逻辑运算符</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># and：两边都为 True 才为 True
+print(True and True)    # True
+print(True and False)   # False
+
+# or：一边为 True 即为 True
+print(True or False)    # True
+print(False or False)   # False
+
+# not：取反
+print(not True)         # False
+print(not False)        # True
+
+# 实际应用
+age = 20
+if age >= 18 and age <= 60:
+    print("成年且未退休")  # 输出</code></pre>
+                </div>
+
+                <h5>4.4 赋值运算符</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">x = 10
+x += 5     # 相当于 x = x + 5，x=15
+x -= 3     # x = 12
+x *= 2     # x = 24
+x /= 4     # x = 6.0
+x //= 2    # x = 3.0
+x %= 2     # x = 1.0</code></pre>
+                </div>
+
+                <h5>4.5 成员运算符</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># in / not in 用于判断元素是否在序列中
+fruits = ["苹果", "香蕉", "橘子"]
+print("苹果" in fruits)      # True
+print("西瓜" not in fruits)  # True
+
+# 字符串也是序列
+text = "Hello Python"
+print("Python" in text)     # True</code></pre>
+                </div>
+
+                <h5>4.6 运算符优先级</h5>
+                <p>从高到低：<code>**</code> > <code>*/%//</code> > <code>+-</code> > <code>比较</code> > <code>not</code> > <code>and</code> > <code>or</code></p>
+                <div class="tip-box">不确定优先级时，用括号 <code>()</code> 明确指定运算顺序。</div>
+            </section>
+
+            <section id="chap5" class="chapter mb-5">
+                <h3>第5章 流程控制</h3>
+
+                <h5>5.1 if 分支结构</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 单分支
+score = 85
+if score >= 60:
+    print("及格了！")
+
+# 双分支
+if score >= 60:
+    print("及格")
+else:
+    print("不及格")
+
+# 多分支
+if score >= 90:
+    print("优秀")
+elif score >= 80:
+    print("良好")
+elif score >= 60:
+    print("及格")
+else:
+    print("不及格")</code></pre>
+                </div>
+
+                <h5>5.2 嵌套 if</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 嵌套 if 判断
+age = 20
+has_ticket = True
+
+if has_ticket:
+    print("有车票，可以进站")
+    if age >= 18:
+        print("已成年，可以乘车")
+    else:
+        print("未成年，需监护人陪同")
+else:
+    print("请先购买车票")</code></pre>
+                </div>
+
+                <h5>5.3 while 循环</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># while 循环：条件成立时重复执行
+# 计算 1 到 100 的和
+i = 1
+total = 0
+while i <= 100:
+    total += i
+    i += 1
+print(f"1+2+...+100 = {total}")  # 5050
+
+# 猜数字游戏
+import random
+target = random.randint(1, 100)
+guess = 0
+while guess != target:
+    guess = int(input("猜一个数字（1-100）："))
+    if guess > target:
+        print("大了")
+    elif guess < target:
+        print("小了")
+print(f"恭喜猜中了！答案是{target}")</code></pre>
+                </div>
+
+                <h5>5.4 for 循环</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># for 循环遍历可迭代对象
+# 遍历字符串
+for char in "Python":
+    print(char, end=" ")  # P y t h o n
+
+print()
+
+# 遍历列表
+fruits = ["苹果", "香蕉", "橘子"]
+for fruit in fruits:
+    print(f"我喜欢吃{fruit}")
+
+# range() 生成数字序列
+for i in range(5):       # 0,1,2,3,4
+    print(i, end=" ")
+print()
+for i in range(1, 10):   # 1,2,...,9
+    print(i, end=" ")
+print()
+for i in range(1, 10, 2): # 1,3,5,7,9（步长2）
+    print(i, end=" ")</code></pre>
+                </div>
+
+                <h5>5.5 break 和 continue</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># break：跳出整个循环
+for i in range(1, 10):
+    if i == 5:
+        break    # 到5就停止
+    print(i, end=" ")  # 1 2 3 4
+print()
+
+# continue：跳过本次循环，继续下一次
+for i in range(1, 10):
+    if i == 5:
+        continue  # 跳过5
+    print(i, end=" ")  # 1 2 3 4 6 7 8 9</code></pre>
+                </div>
+
+                <h5>5.6 经典案例：九九乘法表</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">for i in range(1, 10):
+    for j in range(1, i + 1):
+        print(f"{j}x{i}={i*j}", end="\t")
+    print()</code></pre>
+                </div>
+                <div class="output-box">1x1=1<br>1x2=2	2x2=4<br>1x3=3	2x3=6	3x3=9<br>1x4=4	2x4=8	3x4=12	4x4=16<br>...</div>
+            </section>
+
+            <section id="chap6" class="chapter mb-5">
+                <h3>第6章 字符串详解</h3>
+
+                <h5>6.1 字符串取值与切片</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">s = "Hello Python"
+
+# 索引取值（从0开始）
+print(s[0])     # H
+print(s[6])     # P（第7个字符，索引6）
+print(s[-1])    # n（倒数第一个）
+
+# 切片 [start:end:step]
+print(s[0:5])      # Hello（取索引0到4）
+print(s[6:])       # Python（索引6到末尾）
+print(s[:5])       # Hello（开头到索引4）
+print(s[::2])      # HloPto（步长为2）
+print(s[::-1])     # nohtyP olleH（反转字符串）</code></pre>
+                </div>
+
+                <h5>6.2 常用字符串方法</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">text = "  hello, python world!  "
+
+# 去除空白
+print(text.strip())       # "hello, python world!"
+print(text.lstrip())      # 去掉左侧空白
+print(text.rstrip())      # 去掉右侧空白
+
+# 分割与拼接
+print(text.split())       # ['hello,', 'python', 'world!']（默认按空格）
+print("a,b,c".split(",")) # ['a', 'b', 'c']
+print("-".join(["a","b","c"]))  # "a-b-c"
+
+# 替换
+print(text.replace("python", "Java"))  #  hello, Java world!
+
+# 查找
+print(text.find("python"))  # 8（返回索引位置，找不到返回-1）
+print(text.index("python")) # 8（找不到会报错）
+
+# 大小写转换
+print("Hello".upper())      # HELLO
+print("Hello".lower())      # hello
+print("hello world".title()) # Hello World</code></pre>
+                </div>
+
+                <h5>6.3 转义字符</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">print("换行\n新行")          # \n 换行
+print("制表符\t对齐")         # \t 制表符
+print("单引号\'")             # 单引号'
+print("双引号\"")             # 双引号"
+print("反斜杠\\")             # 反斜杠\
+
+# 原始字符串 r''（忽略转义）
+print(r"换行\n不会生效")       # 原样输出：换行\n不会生效
+# 常用于文件路径
+path = r"C:\Users\name\Documents"</code></pre>
+                </div>
+            </section>
+
+            <section id="chap7" class="chapter mb-5">
+                <h3>第7章 列表 & 元组</h3>
+
+                <h5>7.1 列表增删改查</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">fruits = ["苹果", "香蕉", "橘子"]
+
+# 增
+fruits.append("西瓜")        # 末尾追加 ["苹果","香蕉","橘子","西瓜"]
+fruits.insert(1, "草莓")     # 指定位置插入 ["苹果","草莓","香蕉","橘子","西瓜"]
+
+# 删
+fruits.pop()                # 删除最后一个，返回"西瓜"
+fruits.pop(1)               # 删除索引1的元素，返回"草莓"
+fruits.remove("香蕉")        # 删除第一个匹配的元素
+# del fruits[0]             # 删除索引0的元素
+
+# 改
+fruits[0] = "哈密瓜"         # 修改指定索引的元素
+
+# 查
+print(fruits[0])             # 访问指定索引
+print(fruits.index("哈密瓜")) # 查找元素索引
+print("苹果" in fruits)      # True/False
+print(len(fruits))           # 列表长度</code></pre>
+                </div>
+
+                <h5>7.2 列表遍历与嵌套</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 遍历列表
+for fruit in fruits:
+    print(fruit)
+
+# 带索引遍历
+for i, fruit in enumerate(fruits):
+    print(f"{i}: {fruit}")
+
+# 列表嵌套（二维列表）
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix[0][1])  # 2（第一行第二列）
+
+# 列表推导式（快速生成列表）
+squares = [x**2 for x in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+                </div>
+
+                <h5>7.3 元组（不可变序列）</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 元组一旦创建不可修改
+point = (10, 20)
+print(point[0])  # 10
+# point[0] = 5   # ❌ 报错！元组不可修改
+
+# 元组的应用场景
+# 1. 函数多返回值
+def get_position():
+    return (100, 200)
+
+x, y = get_position()  # 元组解包
+
+# 2. 保护数据不被修改
+DEFAULT_CONFIG = ("127.0.0.1", 8080)
+
+# 列表转元组、元组转列表
+list1 = [1, 2, 3]
+tuple1 = tuple(list1)    # (1, 2, 3)
+list2 = list(tuple1)     # [1, 2, 3]</code></pre>
+                </div>
+            </section>
+
+            <section id="chap8" class="chapter mb-5">
+                <h3>第8章 字典 & 集合</h3>
+
+                <h5>8.1 字典增删改查</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">student = {"name": "小明", "age": 18, "score": 95}
+
+# 查
+print(student["name"])       # 小明（键不存在会报错）
+print(student.get("name"))   # 小明（键不存在返回None）
+print(student.get("gender", "未知"))  # 指定默认值
+
+# 改
+student["age"] = 19         # 修改
+student["gender"] = "男"    # 新增键值对
+
+# 删
+del student["score"]        # 删除指定键
+# student.pop("score")      # 删除并返回值
+
+# 遍历
+for key in student:                    # 遍历键
+    print(key)
+for value in student.values():         # 遍历值
+    print(value)
+for key, value in student.items():     # 遍历键值对
+    print(f"{key}: {value}")</code></pre>
+                </div>
+
+                <h5>8.2 集合（去重 & 集合运算）</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 集合自动去重
+numbers = [1, 2, 2, 3, 3, 3, 4]
+unique = set(numbers)
+print(unique)  # {1, 2, 3, 4}
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+print(a & b)   # 交集 {3, 4}
+print(a | b)   # 并集 {1, 2, 3, 4, 5, 6}
+print(a - b)   # 差集 {1, 2}
+print(a ^ b)   # 对称差 {1, 2, 5, 6}</code></pre>
+                </div>
+
+                <h5>8.3 四大容器对比</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>类型</th><th>可变</th><th>有序</th><th>可重复</th><th>适用场景</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>列表 list</td><td>是</td><td>是</td><td>是</td><td>需要有序、可修改的序列</td></tr>
+                            <tr><td>元组 tuple</td><td>否</td><td>是</td><td>是</td><td>不可修改的数据，函数返回值</td></tr>
+                            <tr><td>字典 dict</td><td>是</td><td>是（3.7+）</td><td>键不可重复</td><td>键值对应，JSON 数据</td></tr>
+                            <tr><td>集合 set</td><td>是</td><td>否</td><td>否</td><td>去重、集合运算</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="chap9" class="chapter mb-5">
+                <h3>第9章 函数基础</h3>
+
+                <h5>9.1 定义与调用</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">def greet(name):
+    """向指定姓名打招呼"""  # 文档字符串
+    print(f"你好，{name}！")
+
+# 调用函数
+greet("小明")   # 你好，小明！
+greet("小红")   # 你好，小红！</code></pre>
+                </div>
+
+                <h5>9.2 函数参数类型</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 位置参数（按顺序传参）
+def add(a, b):
+    return a + b
+print(add(3, 5))  # 8
+
+# 关键字参数（指定参数名）
+print(add(b=5, a=3))  # 8（顺序可调换）
+
+# 默认参数
+def power(base, exp=2):
+    return base ** exp
+print(power(3))     # 9（使用默认exp=2）
+print(power(3, 3))  # 27</code></pre>
+                </div>
+
+                <h5>9.3 函数返回值</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># return 返回结果
+def calc(a, b):
+    return a + b, a - b, a * b  # 多返回值（元组）
+
+add_result, sub_result, mul_result = calc(10, 3)
+print(add_result)  # 13
+
+# 无 return 返回 None
+def show(msg):
+    print(msg)
+result = show("test")
+print(result)  # None</code></pre>
+                </div>
+
+                <h5>9.4 局部变量与全局变量</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 全局变量
+count = 0
+
+def visit():
+    global count  # 声明使用全局变量
+    count += 1
+    print(f"第{count}次访问")
+
+visit()  # 第1次访问
+visit()  # 第2次访问</code></pre>
+                </div>
+
+                <h5>9.5 函数实战案例</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 案例1：简单计算器
+def calculator(a, b, op):
+    if op == "+":
+        return a + b
+    elif op == "-":
+        return a - b
+    elif op == "*":
+        return a * b
+    elif op == "/":
+        return a / b if b != 0 else "除数不能为0"
+    else:
+        return "不支持的运算符"
+
+print(calculator(10, 5, "+"))  # 15
+print(calculator(10, 5, "*"))  # 50
+
+# 案例2：判断素数
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+for num in range(1, 20):
+    if is_prime(num):
+        print(num, end=" ")  # 2 3 5 7 11 13 17 19</code></pre>
+                </div>
+            </section>
+
+            <section id="chap10" class="chapter mb-5">
+                <h3>第10章 文件操作</h3>
+
+                <h5>10.1 文件打开与关闭</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># open() 打开文件
+file = open("test.txt", "r", encoding="utf-8")
+content = file.read()
+print(content)
+file.close()  # 记得关闭文件</code></pre>
+                </div>
+
+                <h5>10.2 读写模式</h5>
+                <div class="table-wrap">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr><th>模式</th><th>说明</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>r</td><td>只读（文件必须存在）</td></tr>
+                            <tr><td>w</td><td>写入（会覆盖原文件，不存在则创建）</td></tr>
+                            <tr><td>a</td><td>追加（在末尾写入，不存在则创建）</td></tr>
+                            <tr><td>r+</td><td>读写（文件必须存在）</td></tr>
+                            <tr><td>w+</td><td>读写（会覆盖）</td></tr>
+                            <tr><td>a+</td><td>读写（追加模式）</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h5>10.3 with 上下文管理器</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># with 自动关闭文件（推荐写法）
+
+# 读文件
+with open("test.txt", "r", encoding="utf-8") as f:
+    content = f.read()       # 读取全部
+    # content = f.readline() # 读一行
+    # content = f.readlines()# 读所有行，返回列表
+    print(content)
+
+# 写文件
+with open("output.txt", "w", encoding="utf-8") as f:
+    f.write("Hello Python\n")
+    f.write("文件写入测试")
+
+# 追加
+with open("output.txt", "a", encoding="utf-8") as f:
+    f.write("\n这是追加的内容")</code></pre>
+                </div>
+
+                <h5>10.4 实战案例</h5>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 案例1：记事本读写工具
+def write_note(filename, content):
+    with open(filename, "a", encoding="utf-8") as f:
+        f.write(content + "\n")
+    print("保存成功！")
+
+def read_notes(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        return "暂无笔记"
+
+# 使用
+write_note("notes.txt", "今天学习了文件操作")
+write_note("notes.txt", "Python 真有趣")
+print(read_notes("notes.txt"))
+
+# 案例2：批量重命名文件
+import os
+
+def rename_files(prefix):
+    files = os.listdir(".")  # 当前目录所有文件
+    for i, f in enumerate(files):
+        if f.endswith(".txt"):
+            new_name = f"{prefix}_{i}.txt"
+            os.rename(f, new_name)
+            print(f"重命名: {f} -> {new_name}")</code></pre>
+                </div>
+                <div class="tip-box">
+                    <strong>课后练习：</strong>
+                    <ol>
+                        <li>写一个程序，读取一个文件并统计其中有多少行、多少个单词</li>
+                        <li>实现一个简单的通讯录，支持添加、查看、搜索联系人（用文件存储）</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>继续学习</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="advance.html" class="text-muted text-decoration-none">进阶教程 →</a></li>
+                    <li><a href="lib.html" class="text-muted text-decoration-none">标准库教程 →</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>

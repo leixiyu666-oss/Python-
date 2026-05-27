@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于本站 - Python全栈学习网</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .about-section { padding: 40px 0; }
+        .feature-list li { margin-bottom: 12px; padding-left: 28px; position: relative; list-style: none; }
+        .feature-list li::before { content: "✓"; position: absolute; left: 0; color: #198754; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link active" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="fw-bold mb-4">关于本站</h1>
+
+            <div class="card border-0 bg-light p-4 mb-4">
+                <h4>网站定位</h4>
+                <p class="mb-0">「Python 全栈学习网」致力于为<strong>零基础学习者</strong>提供一套完整、系统、免费的 Python 教程。从环境搭建到独立开发项目，覆盖 Python 全学习链路。</p>
+            </div>
+
+            <div class="card border-0 bg-light p-4 mb-4">
+                <h4>内容特色</h4>
+                <ul class="feature-list">
+                    <li><strong>零基础友好</strong>：从安装 Python 开始讲起，无需任何编程基础</li>
+                    <li><strong>体系完整</strong>：基础语法 → 进阶特性 → 标准库 → 第三方库 → 实战项目</li>
+                    <li><strong>案例驱动</strong>：每章配有可运行的代码示例，学完即练</li>
+                    <li><strong>易错点标注</strong>：重要易错点用提示框突出，避免踩坑</li>
+                    <li><strong>完全免费</strong>：所有内容免费阅读，无隐藏收费</li>
+                </ul>
+            </div>
+
+            <div class="card border-0 bg-light p-4 mb-4">
+                <h4>技术栈</h4>
+                <p class="mb-0">本站使用纯静态 HTML + CSS + JavaScript 构建，基于 Bootstrap 5 实现响应式布局，Highlight.js 实现代码高亮。无需数据库、无需后端，任何人都可以部署到 GitHub Pages 等免费托管平台。</p>
+            </div>
+
+            <div class="card border-0 bg-light p-4 mb-4">
+                <h4>学习建议</h4>
+                <ol>
+                    <li>按照 <a href="base.html">入门教程</a> → <a href="advance.html">进阶教程</a> → <a href="lib.html">标准库</a> → <a href="project.html">实战项目</a> 的顺序学习</li>
+                    <li>每学完一章，务必亲手敲一遍代码示例</li>
+                    <li>遇到问题先自己思考，再查资料解决</li>
+                    <li>多做项目，编程能力是练出来的，不是看出来的</li>
+                </ol>
+            </div>
+
+            <div class="card border-0 bg-light p-4 mb-4">
+                <h4>免责声明</h4>
+                <p>本站所有内容仅供学习参考。部分示例代码和资源引用自网络，如有侵权请联系删除。本站不对因使用教程内容而产生的任何直接或间接损失承担责任。</p>
+            </div>
+
+            <div class="text-center py-4">
+                <p class="text-muted">如果你觉得本站对你有帮助，欢迎分享给更多学习者！</p>
+                <a href="base.html" class="btn btn-primary btn-lg"><i class="bi bi-book me-2"></i>开始学习</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>快速链接</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="base.html" class="text-muted text-decoration-none">入门教程</a></li>
+                    <li><a href="advance.html" class="text-muted text-decoration-none">进阶教程</a></li>
+                    <li><a href="project.html" class="text-muted text-decoration-none">实战项目</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

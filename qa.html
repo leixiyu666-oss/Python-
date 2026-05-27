@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python问答与易错点汇总</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { padding-top: 70px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 90px); overflow-y: auto; }
+        .qa-card { border: none; border-radius: 10px; margin-bottom: 15px; }
+        .qa-card .question { cursor: pointer; padding: 15px; background: #f8f9fa; border-radius: 10px; font-weight: 600; }
+        .qa-card .question:hover { background: #e9ecef; }
+        .qa-card .question .icon { transition: transform 0.3s; }
+        .qa-card .question.collapsed .icon { transform: rotate(-90deg); }
+        .qa-card .answer { padding: 15px; border-top: 1px solid #dee2e6; }
+        .fatal-card { border-left: 4px solid #dc3545; }
+        .warning-card2 { border-left: 4px solid #ffc107; }
+        .code-block { position: relative; margin: 10px 0; }
+        .code-block .copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="base.html">入门教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="advance.html">进阶教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="lib.html">标准库</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">实战项目</a></li>
+                <li class="nav-item"><a class="nav-link" href="resource.html">工具资源</a></li>
+                <li class="nav-item"><a class="nav-link active" href="qa.html">问答笔记</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sidebar card p-3">
+                <h5 class="fw-bold"><i class="bi bi-list-ul me-2"></i>目录</h5>
+                <hr>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#mistakes">易错点汇总</a>
+                    <a class="nav-link" href="#shallow">浅拷贝 vs 深拷贝</a>
+                    <a class="nav-link" href="#scope">变量作用域</a>
+                    <a class="nav-link" href="#encoding">字符串编码</a>
+                    <a class="nav-link" href="#mutable">可变对象陷阱</a>
+                    <a class="nav-link" href="#qa">常见问答</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <h1 class="fw-bold mb-4">问答 & 易错点汇总</h1>
+            <p class="lead text-muted">整理 Python 学习中 90% 新手会踩的坑，附带详细解释与正确写法。</p>
+
+            <section id="mistakes" class="mb-5">
+                <h3 class="section-title">90% 新手都会踩的坑</h3>
+
+                <div class="card qa-card fatal-card mb-4">
+                    <div class="card-body">
+                        <h5 class="text-danger"><i class="bi bi-exclamation-triangle me-2"></i>坑1：缩进错误</h5>
+                        <p><strong>错误写法：</strong></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">if True:
+print("缩进不对！")  # ❌ IndentationError</code></pre>
+                        </div>
+                        <p><strong>正确写法：</strong></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">if True:
+    print("缩进正确！")  # ✅ 4个空格</code></pre>
+                        </div>
+                        <p class="mb-0 text-muted">Python 用缩进表示代码块，统一使用 4 个空格，<strong>不要混用 Tab 和空格</strong>。</p>
+                    </div>
+                </div>
+
+                <div class="card qa-card warning-card2 mb-4">
+                    <div class="card-body">
+                        <h5 class="text-warning"><i class="bi bi-exclamation-triangle me-2"></i>坑2：列表作为默认参数</h5>
+                        <p><strong>错误写法：</strong></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">def add_item(item, items=[]):
+    items.append(item)
+    return items
+
+print(add_item(1))  # [1]
+print(add_item(2))  # [1, 2]  ❌ 不是期望的 [2]</code></pre>
+                        </div>
+                        <p><strong>原因：</strong>默认参数在函数定义时创建，多次调用共用同一个列表对象。</p>
+                        <p><strong>正确写法：</strong></p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            <pre><code class="language-python">def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shallow" class="mb-5">
+                <h3>浅拷贝 vs 深拷贝</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python">import copy
+
+original = [[1, 2, 3], [4, 5, 6]]
+
+# 浅拷贝：只拷贝外层，内层引用共享
+shallow = copy.copy(original)
+shallow[0][0] = 99
+print(original[0][0])   # 99 ❌ 原列表也被修改了
+
+# 深拷贝：完全独立复制
+deep = copy.deepcopy(original)
+deep[0][0] = 888
+print(original[0][0])   # 99 ✅ 原列表不受影响</code></pre>
+                </div>
+            </section>
+
+            <section id="scope" class="mb-5">
+                <h3>变量作用域问题</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 局部变量 vs 全局变量
+x = 10
+
+def func():
+    x = 20  # 这里创建了局部变量 x，不影响全局
+    print(f"函数内部：{x}")  # 20
+
+func()
+print(f"函数外部：{x}")     # 10
+
+# 想要修改全局变量
+def func2():
+    global x
+    x = 30
+    print(f"函数内部：{x}")  # 30
+
+func2()
+print(f"函数外部：{x}")     # 30</code></pre>
+                </div>
+            </section>
+
+            <section id="encoding" class="mb-5">
+                <h3>字符串编码问题</h3>
+                <p>Python 3 默认使用 UTF-8 编码。读写文件时指定编码，否则可能出现乱码。</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 写文件时指定 UTF-8
+with open("test.txt", "w", encoding="utf-8") as f:
+    f.write("中文内容")
+
+# 读文件时指定 UTF-8
+with open("test.txt", "r", encoding="utf-8") as f:
+    content = f.read()
+    print(content)</code></pre>
+                </div>
+            </section>
+
+            <section id="mutable" class="mb-5">
+                <h3>可变对象陷阱</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <pre><code class="language-python"># 两个变量指向同一个列表
+a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)  # [1, 2, 3, 4] ❌ a 也被修改了
+
+# 要复制列表，使用切片或 copy()
+a = [1, 2, 3]
+c = a[:]       # 切片复制
+# c = a.copy() # 或者用 copy()
+c.append(4)
+print(a)  # [1, 2, 3] ✅
+print(c)  # [1, 2, 3, 4]</code></pre>
+                </div>
+            </section>
+
+            <section id="qa" class="mb-5">
+                <h3 class="section-title">常见问答</h3>
+
+                <div class="accordion" id="qaAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                                Q：Python 2 和 Python 3 有什么区别？
+                            </button>
+                        </h2>
+                        <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                Python 2 已于 2020 年停止维护。主要区别：<code>print</code> 在 2 中是语句（<code>print "hi"</code>），在 3 中是函数（<code>print("hi")</code>）；3 中的除法 <code>/</code> 是浮点除法；3 默认 UTF-8 编码。<strong>请直接学 Python 3</strong>。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                                Q：pip install 安装慢怎么办？
+                            </button>
+                        </h2>
+                        <div id="q2" class="accordion-collapse collapse" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                使用国内镜像源：<code>pip install 包名 -i https://pypi.tuna.tsinghua.edu.cn/simple</code><br>
+                                永久配置：<code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                                Q：什么是 GIL？Python 多线程是假的吗？
+                            </button>
+                        </h2>
+                        <div id="q3" class="accordion-collapse collapse" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                GIL（全局解释器锁）导致同一时刻只有一个线程执行 Python 字节码。对于 I/O 密集型任务（网络请求、文件读写），多线程仍然有效；对于 CPU 密集型任务，使用 <code>multiprocessing</code> 多进程。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                                Q：== 和 is 有什么区别？
+                            </button>
+                        </h2>
+                        <div id="q4" class="accordion-collapse collapse" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                <code>==</code> 比较值是否相等；<code>is</code> 比较是否是同一个对象（内存地址）。<br>
+                                <code>a = [1, 2]; b = [1, 2]; a == b  # True; a is b  # False</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                                Q：怎么学 Python 效率最高？
+                            </button>
+                        </h2>
+                        <div id="q5" class="accordion-collapse collapse" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                1. 看教程 + 敲代码（光看没用）<br>
+                                2. 每章学完做小练习<br>
+                                3. 尽早开始项目实战<br>
+                                4. 多用搜索引擎和 AI 工具辅助<br>
+                                5. 养成看官方文档的习惯
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                                Q：学 Python 需要学哪些第三方库？
+                            </button>
+                        </h2>
+                        <div id="q6" class="accordion-collapse collapse" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">
+                                基础必备：requests、BeautifulSoup、pandas、numpy、matplotlib、openpyxl<br>
+                                按方向选：Flask/Django（Web）、scrapy（爬虫）、pyautogui（自动化）、pytest（测试）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-filetype-py me-2"></i>Python全栈学习网</h5>
+                <p class="small text-muted">面向零基础的 Python 系统教程 | 免费 · 体系 · 实战</p>
+            </div>
+            <div class="col-md-3">
+                <h6>快速链接</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="base.html" class="text-muted text-decoration-none">入门教程</a></li>
+                    <li><a href="project.html" class="text-muted text-decoration-none">实战项目</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>免责声明</h6>
+                <p class="small text-muted">本站内容仅供学习参考，部分资源来自网络，如有侵权请联系删除。</p>
+            </div>
+        </div>
+        <hr class="my-3">
+        <p class="text-center small text-muted mb-0">Python学习教程 &copy; 2026 版权所有</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+function copyCode(btn) {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>
